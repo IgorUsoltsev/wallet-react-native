@@ -18,7 +18,7 @@ export default class Options extends Component {
                     <View style={styles.optionsIcon}>
                         <Icon
                             name="angle-right"
-                            size={45}
+                            size={32}
                             color={Colors.black}
                         />
                     </View>

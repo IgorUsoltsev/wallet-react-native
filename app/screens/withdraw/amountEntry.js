@@ -39,7 +39,6 @@ export default class AmountEntry extends Component {
                     {text: 'Yes', onPress: this.withdrawConfirmed},
                     {
                         text: 'No',
-                        onPress: () => ResetNavigation.dispatchToSingleRoute(this.props.navigation, "Home"),
                         style: 'cancel'
                     },
                 ]

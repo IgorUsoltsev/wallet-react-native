@@ -2,15 +2,37 @@ import React, {Component} from 'react'
 import {View, Text, StyleSheet, TextInput} from 'react-native'
 import Colors from './../config/colors'
 import Icon from "react-native-vector-icons/Ionicons";
+import MIcon from 'react-native-vector-icons/MaterialIcons';
 
 export default class Account extends Component {
     constructor() {
         super();
         this.state = {
             textColor: Colors.black,
-            borderColor: Colors.lightgray
+            borderColor: Colors.lightgray,
+            icEye: 'visibility-off',
+            password: true
         }
     }
+
+    changePwdType = () => {
+        let newState;
+        if (this.state.password) {
+            newState = {
+                icEye: 'visibility',
+                password: false
+            }
+        } else {
+            newState = {
+                icEye: 'visibility-off',
+                password: true
+            }
+        }
+
+        // set new state value
+        this.setState(newState)
+
+    };
 
     render() {
         return (
@@ -46,20 +68,31 @@ export default class Account extends Component {
                         }
                     </View>
                 }
-                <TextInput
-                    onFocus={() => this.setState({
-                        textColor: Colors.lightblue,
-                        borderColor: Colors.lightblue
-                    })}
-                    onBlur={() => this.setState({
-                        textColor: Colors.black,
-                        borderColor: Colors.lightgray
-                    })}
-                    {...this.props}
-                    ref={this.props.reference}
-                    underlineColorAndroid="white"
-                    style={[styles.input, {fontSize: this.props.fontSize ? this.props.fontSize : 22}]}
-                />
+                <View style={{flexDirection: 'row'}}>
+                    <TextInput
+                        onFocus={() => this.setState({
+                            textColor: Colors.lightblue,
+                            borderColor: Colors.lightblue
+                        })}
+                        onBlur={() => this.setState({
+                            textColor: Colors.black,
+                            borderColor: Colors.lightgray
+                        })}
+                        {...this.props}
+                        ref={this.props.reference}
+                        underlineColorAndroid="white"
+                        secureTextEntry={this.state.password}
+                        style={[styles.input, {fontSize: this.props.fontSize ? this.props.fontSize : 22}]}
+                    />
+                    <View style={{width:30}}>
+                        <MIcon style={styles.icon}
+                            name={this.state.icEye}
+                            size={25}
+                            color={this.state.borderColor}
+                            onPress={this.changePwdType}
+                        />
+                    </View>
+                </View>
             </View>
         )
     }
@@ -67,6 +100,7 @@ export default class Account extends Component {
 
 const styles = StyleSheet.create({
     input: {
+        flex:1,
         height: 50,
         paddingLeft: 0,
         paddingBottom: 10,
@@ -93,4 +127,9 @@ const styles = StyleSheet.create({
         color:Colors.red,
         paddingLeft:5,
     },
+    icon: {
+        top:15,
+        right:0,
+        position: 'absolute'
+    }
 })

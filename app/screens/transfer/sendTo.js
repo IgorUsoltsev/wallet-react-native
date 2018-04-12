@@ -26,9 +26,8 @@ export default class SendTo extends Component {
 
     constructor(props) {
         super(props)
-        const params = this.props.navigation.state.params
         this.state = {
-            balance:params.balance,
+            balance: 0,
             ready: false,
             refreshing: false,
             reference: "",
@@ -39,6 +38,10 @@ export default class SendTo extends Component {
     }
 
     async componentWillMount() {
+        let balance = await AsyncStorage.getItem("balance")
+        this.setState({
+            balance: parseFloat(balance)
+        })
         this.showContactsAsync()
         let responseJson = await UserInfoService.getUserDetails()
         if (responseJson.status === "success") {
@@ -183,7 +186,7 @@ export default class SendTo extends Component {
                     <Header
                         navigation={this.props.navigation}
                         title="To"
-                        back
+                        drawer
                         right
                     />
                     <KeyboardAvoidingView style={styles.container} behavior={'padding'}>

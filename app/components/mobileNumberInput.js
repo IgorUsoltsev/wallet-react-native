@@ -28,10 +28,16 @@ export default class Account extends Component {
                         filterable
                         cca2={this.state.cca2}
                         translation="eng"
-                        styles={{flex: 1, justifyContent: 'center'}}
+                        styles={{width: 60, justifyContent: 'center'}}
                     />
                     <TextInput
-                        {...this.props}
+                        value={this.props.code}
+                        editable={false}
+                        style={styles.code}
+                    />
+                    <TextInput
+                        {...this.props}   
+                        ref={this.props.reference}
                         style={styles.input}
                     />
                 </View>
@@ -48,6 +54,17 @@ const styles = StyleSheet.create({
         paddingLeft: 0,
         fontSize: 16,
         color: Colors.black,
+        fontWeight: 'normal',
+        borderColor: 'white',
+        borderWidth: 1,
+        alignItems: 'center',
+    },
+    code: {
+        width: 40,
+        height: 50,
+        fontSize: 16,
+        color: Colors.black,
+        textAlign: 'right',
         fontWeight: 'normal',
         borderColor: 'white',
         borderWidth: 1,

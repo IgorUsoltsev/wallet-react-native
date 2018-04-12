@@ -15,6 +15,7 @@ import UserInfoService from './../../services/userInfoService'
 import SettingsService from './../../services/settingsService'
 import Colors from './../../config/colors'
 import Big from 'big.js'
+import Icon from 'react-native-vector-icons/Ionicons'
 
 export default class Transactions extends Component {
     constructor(props) {
@@ -45,7 +46,7 @@ export default class Transactions extends Component {
         this.getData(this.state.currency)
     }
 
-    componentWillReceiveProps(nextProps) {
+    async componentWillReceiveProps(nextProps) {
         if (this.props.currency !== nextProps.currency) {
             this.setState({
                 initialLoading: true,
@@ -99,6 +100,11 @@ export default class Transactions extends Component {
                 this.props.logout()
             }
         }
+        if(this.state.data.length> 0){
+            this.setState({
+                noTransaction:false
+            })
+        }
     }
 
     getData = async (currency) => {
@@ -110,7 +116,7 @@ export default class Transactions extends Component {
         this.setData(responseJson)
     }
 
-    handleRefresh() {
+    async handleRefresh() {
         this.state.updateBalance()
         if (this.state.loading !== true) {
             this.setState({refreshing: true});
@@ -162,9 +168,20 @@ export default class Transactions extends Component {
                             <View style={{
                                 marginTop: 10, flexDirection: 'column', backgroundColor: 'white', padding: 20
                             }}>
-                                <Text style={{paddingTop: 15, fontSize: 18, fontWeight: 'normal', color: Colors.black}}>
+                                <Text style={{ fontSize: 18, fontWeight: 'normal', color: Colors.black}}>
                                     {this.state.verified ? "No transactions yet." : "Please verify your email address to redeem any unclaimed transactions. Pull to refresh your balance."}
                                 </Text>
+                            </View>
+                            <View style={{marginTop:30,alignItems:'center',justifyContent:'center', flex:1}}>
+                                <Text style={{fontSize: 18, fontWeight: 'normal', color: Colors.black}}>
+                                    Swipe down to refresh
+                                </Text>
+                                <Icon
+                                    name="ios-arrow-down-outline"
+                                    size={40}
+                                    color={Colors.black}
+                                    style={{paddingTop: 20}}
+                                />
                             </View>
                         </ScrollView>
                     }

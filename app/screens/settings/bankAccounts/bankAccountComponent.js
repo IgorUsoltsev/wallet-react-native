@@ -8,7 +8,7 @@ export default class BankAccountComponent extends Component {
     render() {
         return (
             <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
-                <ScrollView keyboardDismissMode={'interactive'}>
+                <ScrollView keyboardDismissMode={'interactive'} keyboardShouldPersistTaps='always'>
                     <TextInput
                         title="Account holder"
                         placeholder="e.g. John Snow"

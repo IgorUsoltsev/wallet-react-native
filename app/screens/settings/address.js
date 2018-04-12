@@ -77,7 +77,7 @@ export default class Address extends Component {
                     title="Address"
                 />
                 <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
-                    <ScrollView keyboardDismissMode={'interactive'}>
+                    <ScrollView keyboardDismissMode={'interactive'} keyboardShouldPersistTaps='always'>
 
                         <TextInput
                             title="Address Line 1"
@@ -86,7 +86,6 @@ export default class Address extends Component {
                             underlineColorAndroid="white"
                             value={this.state.line_1}
                             onChangeText={(line_1) => this.setState({line_1})}
-
                         />
 
                         <TextInput

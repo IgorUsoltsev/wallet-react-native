@@ -61,7 +61,6 @@ export default class AmountEntry extends Component {
                     {text: 'Yes', onPress: () => this.transferConfirmed(amount, currency.code)},
                     {
                         text: 'No',
-                        onPress: () => ResetNavigation.dispatchToSingleRoute(this.props.navigation, "Home"),
                         style: 'cancel'
                     },
                 ]

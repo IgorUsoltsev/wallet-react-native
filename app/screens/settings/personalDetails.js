@@ -138,7 +138,7 @@ export default class Settings extends Component {
                     title="Personal details"
                 />
                 <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
-                    <ScrollView keyboardDismissMode={'interactive'}>
+                    <ScrollView keyboardDismissMode={'interactive'} keyboardShouldPersistTaps='always'>
                         <View style={styles.profile}>
                             <TouchableHighlight style={{width: 100}} onPress={() => this.openModal()}>
                                 {this.state.profile ?

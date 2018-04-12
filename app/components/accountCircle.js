@@ -1,25 +1,29 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableHighlight, Image } from 'react-native'
+import React, {Component} from 'react'
+import {View, Text, StyleSheet, TouchableHighlight, Image} from 'react-native'
 import Colors from './../config/colors'
 
 export default class AccountCircle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            balance: 0
+            balance: 0,
+            color:Colors.darkergray
         }
+        //console.log(this.props.activeCurrency)
     }
 
     render() {
         return (
             <View style={styles.row}>
                 <TouchableHighlight
-                    underlayColor={this.props.active ? Colors.gold : Colors.darkergray}
+                    underlayColor={this.props.getAccountList.activeCurrency? Colors.gold : Colors.darkergray}
                     onPress={() => {
-                        this.props.active ? console.log("Account circle") :
+                        /*this.setState({
+                            color: this.props.getAccountList.activeCurrency ? Colors.gold : Colors.darkergray
+                        })*/
                         this.props.getSelectedCurrencies(this.props.getAccountList)
                     }}
-                    style={[styles.options, { backgroundColor: this.props.active ? Colors.gold : Colors.darkergray }]}>
+                    style={[styles.options, {backgroundColor: this.props.getAccountList.activeCurrency? Colors.gold : Colors.darkergray}]}>
                     <Text style={{
                         color: 'white',
                         fontSize: 16,
@@ -28,7 +32,7 @@ export default class AccountCircle extends Component {
                         {this.props.getAccountList ? this.props.getAccountList.name.substr(0, 2).toUpperCase() : ''}
                     </Text>
                 </TouchableHighlight>
-                <Text style={{ color: Colors.darkestgray, paddingTop: 10, paddingBottom: 0, textAlign: 'center' }}>
+                <Text style={{color: Colors.darkestgray, paddingTop: 10, paddingBottom: 0, textAlign: 'center'}}>
                     {this.props.getAccountList ? this.props.getAccountList.name : ''}
                 </Text>
             </View>

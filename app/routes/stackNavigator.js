@@ -80,9 +80,9 @@ const Stack = {
     SendMoney: {
         screen: SendMoney,
     },
-    SendTo: {
-        screen: SendTo,
-    },
+    // SendTo: {
+    //     screen: SendTo,
+    // },
     QRcodeScanner: {
         screen: QRcodeScanner,
     },

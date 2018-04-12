@@ -1,61 +1,55 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet, Image, Alert, Linking } from 'react-native'
-import UserInfoService from './../../services/userInfoService'
-import Colors from './../../config/colors'
-import Header from './../../components/header'
+import React, { Component } from 'react';
+import { View, Text, StyleSheet, Image, Alert, Linking } from 'react-native';
+import UserInfoService from './../../services/userInfoService';
+import Colors from './../../config/colors';
+import Header from './../../components/header';
 
 export default class About extends Component {
   static navigationOptions = {
     title: 'About',
-  }
+  };
 
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       company: {},
-    }
+    };
   }
 
   componentDidMount() {
-    this.getData()
+    this.getData();
   }
 
   getData = async () => {
-    let responseJson = await UserInfoService.getCompany()
-    if (responseJson.status === "success") {
+    let responseJson = await UserInfoService.getCompany();
+    if (responseJson.status === 'success') {
       this.setState({
         company: responseJson.data,
-      })
+      });
+    } else {
+      Alert.alert('Error', responseJson.message, [{ text: 'OK' }]);
     }
-    else {
-      Alert.alert('Error',
-        responseJson.message,
-        [{ text: 'OK' }])
-    }
-  }
+  };
 
   openLink = () => {
     Linking.canOpenURL(this.state.company.website).then(supported => {
       if (supported) {
-        Linking.openURL(this.state.company.website)
+        Linking.openURL(this.state.company.website);
+      } else {
+        Alert.alert(
+          'Error',
+          "Don't know how to open URI: " + this.state.company.website,
+          [{ text: 'OK' }],
+        );
       }
-      else {
-        Alert.alert('Error',
-          'Don\'t know how to open URI: ' + this.state.company.website,
-          [{ text: 'OK' }])
-      }
-    })
-  }
+    });
+  };
 
   render() {
     return (
       <View style={styles.container}>
-        <Header
-          navigation={this.props.navigation}
-          drawer
-          title="About"
-        />
+        <Header navigation={this.props.navigation} drawer title="About" />
         <View style={styles.details}>
           <Text style={{ fontSize: 30, color: Colors.black }}>
             {this.state.company.name}
@@ -72,16 +66,15 @@ export default class About extends Component {
           </View>
         </View>
         <View style={styles.logo}>
-          {this.state.company.logo !== null ?
+          {this.state.company.logo !== null ? (
             <Image
               style={{ width: 200, height: 100 }}
               source={{ uri: this.state.company.logo }}
-            /> :
-            null
-          }
+            />
+          ) : null}
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -107,4 +100,4 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     alignItems: 'center',
   },
-})
+});

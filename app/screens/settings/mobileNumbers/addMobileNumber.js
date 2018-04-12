@@ -4,6 +4,7 @@ import SettingsService from './../../../services/settingsService'
 import TextInput from './../../../components/mobileNumberInput'
 import Colors from './../../../config/colors'
 import Header from './../../../components/header'
+const phoneUtil = require('google-libphonenumber').PhoneNumberUtil.getInstance();
 
 export default class AmountEntry extends Component {
     static navigationOptions = {
@@ -14,16 +15,17 @@ export default class AmountEntry extends Component {
         super(props);
         this.state = {
             routeName:this.props.navigation.state.params.routeName,
-            number: '+1',
+            number: '',
+            code: '+1',
             primary: false,
         }
     }
 
     changeCountryCode = (code) => {
-        this.setState({number: '+' + code})
+        this.setState({code: '+' + code})
     }
     add = async () => {
-        let responseJson = await SettingsService.addMobile({number:this.state.number,primary:this.state.primary})
+        let responseJson = await SettingsService.addMobile({number:this.state.code+this.state.number,primary:this.state.primary})
 
         if (responseJson.status === "success") {
             this.props.navigation.navigate("VerifyMobileNumber",{routeName:this.state.routeName})
@@ -51,6 +53,7 @@ export default class AmountEntry extends Component {
                             value={this.state.number}
                             onChangeText={(number) => this.setState({number})}
                             changeCountryCode={this.changeCountryCode}
+                            code={this.state.code}
                         />
                     </View>
                     <TouchableHighlight

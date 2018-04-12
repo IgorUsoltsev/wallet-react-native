@@ -53,6 +53,14 @@ export default class Account extends Component {
         return (
             <View style={{paddingTop: Expo.Constants.statusBarHeight,backgroundColor:Colors.lightblue}}>
                 {
+                    this.props.noAccounts === true &&
+                     <View style={{paddingVertical:4, paddingHorizontal: 20, backgroundColor:Colors.gold, justifyContent:'center',alignItems:'center'}}>
+                        <Text style={{color:'white', textAlign: 'center'}}>
+                            No accounts added yet.
+                        </Text>
+                    </View>
+                }
+                {
                     this.props.creditSwitch === false && this.props.debitSwitch === true &&
                      <View style={{paddingVertical:4, paddingHorizontal: 20, backgroundColor:Colors.red, justifyContent:'center',alignItems:'center'}}>
                         <Text style={{color:'white', textAlign: 'center'}}>
