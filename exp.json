@@ -1,8 +1,8 @@
 {
-  "name": "Rehive Wallet",
-  "description": "A multi-currency wallet built on the Rehive platform.",
-  "version": "0.0.1",
-  "slug": "rehive-wallet",
+  "name": "Rehive Bitcoin Wallet",
+  "description": "A bitcoin wallet built on the Rehive platform.",
+  "version": "0.0.0",
+  "slug": "rehive-wallet-bitcoin",
   "privacy": "public",
   "sdkVersion": "24.0.0",
   "orientation": "portrait",
@@ -17,9 +17,9 @@
   },
   "ios": {
     "supportsTablet": true,
-    "bundleIdentifier": "com.rehive.wallet"
+    "bundleIdentifier": "com.rehive.wallet-bitcoin"
   },
   "android": {
-    "package": "com.rehive.wallet"
+    "package": "com.rehive.wallet-bitcoin"
   }
 }
