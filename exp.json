@@ -1,7 +1,7 @@
 {
   "name": "Rehive Bitcoin Wallet",
   "description": "A bitcoin wallet built on the Rehive platform.",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "slug": "rehive-wallet-bitcoin",
   "privacy": "public",
   "sdkVersion": "24.0.0",

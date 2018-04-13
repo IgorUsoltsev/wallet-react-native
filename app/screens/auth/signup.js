@@ -205,7 +205,7 @@ export default class Signup extends Component {
     if (
       !this.state.password_error &&
       this.state.email_status &&
-      this.state.mobile_number_status &&
+      // this.state.mobile_number_status &&
       this.state.company &&
       this.state.password1_status
     ) {
