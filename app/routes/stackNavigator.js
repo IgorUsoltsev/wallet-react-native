@@ -5,6 +5,7 @@ import Login from './../screens/auth/login'
 import InitialScreen from './../screens/home/initialScreen'
 import Signup from './../screens/auth/signup'
 import AuthVerifyMobile from './../screens/auth/verifyMobile'
+import AuthVerifyMobileNew from './../screens/auth/verifyMobileNew'
 import ForgetPassword from './../screens/auth/forgetPassword'
 import BankAccounts from './../screens/withdraw/bankAccounts'
 import BitcoinAddresses from './../screens/withdraw/bitcoinAddresses'
@@ -62,8 +63,11 @@ const Stack = {
     Signup: {
         screen: Signup,
     },
+    // AuthVerifyMobile: {
+    //     screen: AuthVerifyMobile,
+    // },
     AuthVerifyMobile: {
-        screen: AuthVerifyMobile,
+        screen: AuthVerifyMobileNew,
     },
     ForgetPassword: {
         screen: ForgetPassword,
