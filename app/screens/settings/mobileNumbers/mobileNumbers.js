@@ -87,7 +87,7 @@ export default class Settings extends Component {
 
         if (responseJson.status === "success") {
             this.setState({loading: false})
-            this.props.navigation.navigate("VerifyMobileNumber", {routeName: this.state.routeName})
+            this.props.navigation.navigate("VerifyMobileNumber", {routeName: this.state.routeName, mobile:number})
         }
         else {
             Alert.alert('Error',

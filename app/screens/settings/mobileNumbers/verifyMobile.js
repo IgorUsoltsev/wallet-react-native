@@ -20,8 +20,6 @@ export default class AmountEntry extends Component {
   }
 
   reload = () => {
-    
-    console.log("addEmailAddress: "+ this.state.routeName)
     ResetNavigation.dispatchUnderDrawer(this.props.navigation, this.state.routeName!=null? 'GetVerified':'Settings', 'SettingsMobileNumbers')
   }
 

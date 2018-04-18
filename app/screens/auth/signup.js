@@ -206,7 +206,6 @@ export default class Signup extends Component {
                 } else {
                     Auth.login(this.props.navigation, loginInfo)
                 }
-                Keyboard.dismiss()
             }
             else {
                 //console.log(responseJson.message)

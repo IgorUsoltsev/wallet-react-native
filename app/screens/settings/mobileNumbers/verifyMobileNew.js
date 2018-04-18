@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 import {View, KeyboardAvoidingView, StyleSheet, AsyncStorage, TouchableHighlight, Text, Alert, TextInput} from 'react-native'
-import SettingsService from './../../services/settingsService'
-import Auth from './../../util/auth'
-import AuthService from './../../services/authService'
-import Colors from './../../config/colors'
-import Header from './../../components/header'
-import colors from './../../config/colors';
+import SettingsService from './../../../services/settingsService'
+import Colors from './../../../config/colors'
+import Header from './../../../components/header'
+import ResetNavigation from './../../../util/resetNavigation'
 
 export default class AmountEntry extends Component {
     static navigationOptions = {
@@ -24,8 +22,8 @@ export default class AmountEntry extends Component {
             i3: '',
             i4: '',
             i5: '',
-            loginInfo: params.loginInfo,
-            signupInfo: params.signupInfo,
+            mobile: params.mobile,
+            routeName: params.routeName,
             resend: false,
         }
     }
@@ -41,8 +39,9 @@ export default class AmountEntry extends Component {
     }
 
     reload = () => {
-        Auth.login(this.props.navigation, this.state.loginInfo)
+      ResetNavigation.dispatchUnderDrawer(this.props.navigation, this.state.routeName!=null? 'GetVerified':'Settings', 'SettingsMobileNumbers')
     }
+    
     resend = async () => {
         if(!this.state.resend) {
             return;
@@ -53,10 +52,16 @@ export default class AmountEntry extends Component {
                 resend:true
             })
         },30000)
-        let responseJson = await SettingsService.resendMobileVerification({
-            mobile: this.state.signupInfo.mobile_number,
-            company: this.state.signupInfo.company
-        })
+        const userData = await AsyncStorage.getItem('user')
+
+        const user = JSON.parse(userData)
+
+        const body = {
+            mobile: this.state.mobile,
+            company: user.company,
+        }
+
+        let responseJson = await SettingsService.resendMobileVerification(body)
 
         this.setState({
             resend: false,
@@ -83,10 +88,10 @@ export default class AmountEntry extends Component {
 
     }
     verify = async () => {
-        await AsyncStorage.setItem("token", this.state.loginInfo.token)
         var data = {
             otp: this.state.i1+this.state.i2+this.state.i3+this.state.i4+this.state.i5
         }
+        console.log(data)
         let responseJson = await SettingsService.verifyMobile(data)
 
         if (responseJson.status === "success") {
@@ -119,12 +124,13 @@ export default class AmountEntry extends Component {
                 <Header
                     navigation={this.props.navigation}
                     title="Verify mobile number"
+                    back
                 />
                 <KeyboardAvoidingView style={styles.container} behavior={'padding'}>
                     <View style={{flex: 2, paddingHorizontal:40}}>
                         <View style={{flex:2, alignItems: 'center', justifyContent: 'center',}}>
                             <Text style={{fontSize:18, textAlign:'center', color: Colors.black}}>
-                                Enter 5 digit pin sent to your mobile number {this.state.signupInfo.mobile_number}
+                                Enter 5 digit pin sent to your mobile number {this.state.mobile}
                                 {/* Enter 5 digit pin sent to your mobile number */}
                             </Text>
                         </View>
