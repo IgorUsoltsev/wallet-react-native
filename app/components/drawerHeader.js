@@ -17,9 +17,9 @@ class DrawerHeader extends Component {
         onPress={() =>
           this.props.navigation.navigate('SettingsPersonalDetails')
         }>
-        <View style={[viewStyleContainer, { backgroundColor: colors.primary }]}>
+        <View style={[viewStyleContainer, { backgroundColor: colors.tertiary }]}>
           <Image
-            style={[imageStylePhoto, { borderColor: colors.secondary }]}
+            style={[imageStylePhoto, { borderColor: colors.quinary }]}
             source={
               profile.profile
                 ? {
@@ -30,12 +30,12 @@ class DrawerHeader extends Component {
             }
           />
           <View style={viewStyleName}>
-            <Text style={[textStyleName, { color: colors.primaryContrast }]}>
+            <Text style={[textStyleName, { color: colors.primary }]}>
               {profile.first_name
                 ? profile.first_name + ' ' + profile.last_name
                 : profile.username}
             </Text>
-            <Text style={[textStyleEmail, { color: colors.primaryContrast }]}>
+            <Text style={[textStyleEmail, { color: colors.primary, opacity: 0.7 }]}>
               {profile.email || ''}
             </Text>
           </View>
@@ -55,7 +55,7 @@ const styles = {
     width: 100,
     height: 100,
     borderRadius: 50,
-    borderWidth: 5,
+    borderWidth: 1,
   },
   viewStyleName: {
     paddingVertical: 12,

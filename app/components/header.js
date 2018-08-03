@@ -155,6 +155,7 @@ export default class Header extends Component {
               <HeaderButton
                 onPress={() => this.props.navigation.openDrawer()}
                 icon="menu"
+                color={Colors.drawerColor}
               />
             ) : null}
             {back ? (
@@ -162,6 +163,7 @@ export default class Header extends Component {
                 onPress={() => navigation.goBack()}
                 style={{ padding: 20 }}
                 icon="arrow-back"
+                color={Colors.drawerColor}
               />
             ) : null}
           </View>
@@ -216,7 +218,7 @@ const styles = {
     justifyContent: 'center',
   },
   titleText: {
-    color: 'white',
+    color: '#5a5a5a',
     fontSize: 20,
     paddingLeft: 0,
   },

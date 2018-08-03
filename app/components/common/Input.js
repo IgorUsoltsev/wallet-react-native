@@ -148,7 +148,7 @@ class Input extends Component {
           style={[
             viewStyleContainer,
             {
-              backgroundColor: colors.primaryContrast,
+              backgroundColor: colors.primary,
             },
           ]}>
           <View style={{ flexDirection: 'row' }}>

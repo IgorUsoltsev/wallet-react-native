@@ -5,7 +5,7 @@ import { NavigationActions, DrawerItems } from 'react-navigation';
 import { ScrollView, Text, View } from 'react-native';
 
 import DrawerHeader from './../components/drawerHeader';
-import DrawerOption from './DrawerOption';
+import DrawerOption from './drawerOption';
 
 class CustomDrawer extends Component {
   render() {

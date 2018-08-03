@@ -274,7 +274,7 @@ class CardList extends Component {
       <KeyboardAvoidingView
         style={{
           flex: 1,
-          backgroundColor: '#e4e4e4',
+          backgroundColor: '#FFFFFF',
         }}
         behavior={'padding'}
         enabled>

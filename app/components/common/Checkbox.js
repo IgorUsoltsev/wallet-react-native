@@ -28,7 +28,7 @@ class Checkbox extends Component {
       <View
         style={[
           viewStyleContainer,
-          { backgroundColor: colors.primaryContrast },
+          { backgroundColor: colors.primary },
         ]}>
         <View style={viewStyleContainerCheckbox}>
           <View style={viewStyleCheckbox}>
@@ -36,7 +36,7 @@ class Checkbox extends Component {
               onPress={toggleCheck} //value ? {this.setState({ value })} : 'square-outline'}
               name={value ? 'check-box' : 'check-box-outline-blank'}
               size={32}
-              color={value ? colors.primary : 'lightgrey'}
+              color={value ? colors.primaryContrast : 'lightgrey'}
             />
           </View>
           <View style={viewStyleText}>
@@ -87,7 +87,7 @@ const styles = {
     paddingBottom: 2,
   },
   textStyleLink: {
-    color: 'lightblue',
+    color: Colors.primaryContrast,
     fontSize: 12,
     // flex: 1,
     marginRight: 16,

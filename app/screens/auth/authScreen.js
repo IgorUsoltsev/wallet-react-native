@@ -147,6 +147,9 @@ class AuthScreen extends Component {
       imageContainer,
       image,
       textStyle,
+      descriptionText,
+      footerFixed,
+      footerDarkText
     } = styles;
     const {
       mainState,
@@ -163,43 +166,60 @@ class AuthScreen extends Component {
 
     const slides = company_config ? company_config.sliders.landing : null;
 
+    const company = company_config ? company_config.company.id : null;
+
+    const description = company_config ? company_config.company.description : null;
+
     switch (mainState) {
       case 'landing':
         return (
           <View style={viewStyleLanding}>
-            <Animatable.View style={imageContainer} animation="zoomInRight">
-              {slides && slides.length > 0 ? (
-                <Slides data={slides} height={200} width={SCREEN_WIDTH} />
-              ) : (
-                <Image
-                  source={require('./../../../assets/icons/icon.png')}
-                  resizeMode="contain"
-                  style={image}
+            <View style={{flex:1, alignItems: 'center', justifyContent: 'center'}}>
+              <Animatable.View style={imageContainer} animation="zoomInRight">
+                {slides && slides.length > 0 ? (
+                    <Slides data={slides} height={200} width={SCREEN_WIDTH} />
+                ) : (
+                    <Image
+                        source={
+                          company == 'pxpay_demo'
+                              ? require('./../../../assets/icons/pxpay_logo.png')
+                              : require('./../../../assets/icons/icon.png')
+                        }
+                        resizeMode="contain"
+                        style={image}
+                    />
+                )}
+                {description && (
+                    <Text style={[descriptionText]}>{description}</Text>
+                )}
+              </Animatable.View>
+              <View style={buttonsContainer}>
+                <Button
+                    label="LOG IN"
+                    textColor={colors.secondaryContrast}
+                    backgroundColor={colors.secondary}
+                    size="large"
+                    reference={input => {
+                      this.login = input;
+                    }}
+                    onPress={() => nextAuthFormState('login')}
+                    animation="fadeInUpBig"
                 />
-              )}
-            </Animatable.View>
-            <View style={buttonsContainer}>
+              </View>
+            </View>
+            <View style={footerFixed}>
+              <Text style={[footerDarkText]}>New to PXPay?</Text>
               <Button
-                label="LOG IN"
-                textColor={colors.secondaryContrast}
-                backgroundColor={colors.secondary}
-                size="large"
-                reference={input => {
-                  this.login = input;
-                }}
-                onPress={() => nextAuthFormState('login')}
-                animation="fadeInUpBig"
-              />
-              <Button
-                label="Register"
-                textColor={colors.primaryContrast}
-                backgroundColor="transparent"
-                // size="large"
-                reference={input => {
-                  this.login = input;
-                }}
-                onPress={() => nextAuthFormState('register')}
-                animation="fadeInUpBig"
+                  label="Register"
+                  textColor={colors.tertiaryContrast}
+                  backgroundColor="transparent"
+                  height="auto"
+                  reference={input => {
+                    this.login = input;
+                  }}
+                  textDecoration="underline"
+                  onPress={() => nextAuthFormState('register')}
+                  animation="fadeInUpBig"
               />
             </View>
           </View>
@@ -583,7 +603,8 @@ const styles = {
   },
   buttonsContainer: {
     width: '100%',
-    padding: 16,
+    paddingTop: 25,
+    paddingHorizontal: 40
   },
   viewStyleLanding: {
     justifyContent: 'center',
@@ -603,7 +624,8 @@ const styles = {
   },
   image: {
     maxWidth: 150,
-    height: 70,
+    height: 40,
+    marginBottom: 15
   },
   imageSmall: {
     maxWidth: 250,
@@ -626,6 +648,23 @@ const styles = {
     fontSize: 12,
     color: Colors.primary,
   },
+  descriptionText: {
+    maxWidth: 200,
+    fontSize: 24,
+    textAlign: 'center',
+    color: Colors.primaryContrast,
+  },
+  footerFixed: {
+    paddingTop: 15,
+    paddingBottom: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: Colors.tertiary,
+  },
+  footerDarkText: {
+    fontSize: 12,
+    color: Colors.primaryContrast,
+  }
 };
 
 const mapStateToProps = ({ auth }) => {

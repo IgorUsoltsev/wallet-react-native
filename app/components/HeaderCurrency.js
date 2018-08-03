@@ -135,7 +135,7 @@ const styles = {
     fontWeight: 'bold',
   },
   iconStyleTitleRight: {
-    right: -8,
+    right: 0,
     top: -8,
     margin: 0,
     position: 'absolute',

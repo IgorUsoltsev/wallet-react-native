@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './global.js';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 

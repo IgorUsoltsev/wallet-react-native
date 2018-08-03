@@ -1,17 +1,21 @@
 export default {
-  primary: '#4d4d4d',
-  secondary: '#a6a6a6',
-  tertiary: '#c4c4c4',
-  focus: '#9797F0',
+  primary: "#FFFFFF",
+  secondary: "#4FCBFF",
+  tertiary: "#00B4FF",
+  quinary: "#009EE1",
+  focus: "#4FCBFF",
 
-  primaryContrast: '#f3f3f3',
-  secondaryContrast: '#2d2d2d',
-  tertiaryContrast: '#000000',
-  focusContrast: '#2d2d2d',
+  primaryContrast: "#051627",
+  secondaryContrast: "#FFFFFF",
+  tertiaryContrast: "#FFFFFF",
+  //tertiaryContrast: "#828A93",
+  focusContrast: "#000000",
 
-  warning: '#FC8755',
-  error: '#f44336',
-  success: '#4CAF50',
-  positive: '#4CAF50',
-  negative: '#f44336',
+  warning: "#FC8755",
+  error: "#f44336",
+  success: "#4CAF50",
+  positive: "#4CAF50",
+  negative: "#f44336",
+
+  drawerColor: "#4FCBFF"
 };

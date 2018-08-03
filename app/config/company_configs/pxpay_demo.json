@@ -2,7 +2,7 @@
   "company": {
     "id": "pxpay_demo",
     "name": "PXPay",
-    "description": "Send and receive money easily."
+    "description": "Send and receive money easily"
   },
   "services": {
     "bitcoin": false,
@@ -69,11 +69,12 @@
     "primary": "#FFFFFF",
     "secondary": "#4FCBFF",
     "tertiary": "#00B4FF",
+    "quinary": "#009EE1",
     "focus": "#4FCBFF",
 
     "primaryContrast": "#051627",
     "secondaryContrast": "#FFFFFF",
-    "tertiaryContrast": "#828A93",
+    "tertiaryContrast": "#FFFFFF",
     "focusContrast": "#000000",
 
     "warning": "#FC8755",
@@ -97,7 +98,12 @@
     "error": "#f44336",
     "success": "#4CAF50",
     "positive": "#4CAF50",
-    "negative": "#f44336"
+    "negative": "#f44336",
+
+    "drawerColor": "#4FCBFF"
+  },
+  "sizes": {
+    "btn_default": 16
   },
   "cards": {
     "home": {

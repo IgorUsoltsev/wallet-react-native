@@ -10,29 +10,34 @@ import Colors from './../../config/colors';
 
 class Button extends Component {
   _buttonStyle() {
+
     const { _buttonStyle } = styles;
-    const { backgroundColor, size, round, buttonStyle } = this.props;
+    const { backgroundColor, size, round, buttonStyle, height } = this.props;
     return [
       _buttonStyle,
       {
         backgroundColor,
-        height: size === 'large' ? 40 : size === 'small' ? 30 : 36,
+        height: height
+          ? height
+          : size === 'large' ? 50 : size === 'small' ? 30 : 36,
         borderRadius: round
           ? size === 'large' ? 20 : size === 'small' ? 15 : 18
-          : 2.5,
+          : 4,
       },
       buttonStyle,
     ];
   }
 
   textStyle() {
+
     const { textStyle } = styles;
-    const { size, textColor } = this.props;
+    const { size, textColor, textDecoration } = this.props;
     return [
       textStyle,
       {
         color: textColor,
-        fontSize: size === 'large' ? 18 : size === 'small' ? 12 : 14,
+        textDecorationLine: textDecoration,
+        fontSize: size === 'large' ? 16 : size === 'small' ? 12 : 14,
       },
     ];
   }
@@ -85,7 +90,9 @@ Button.propTypes = {
   type: PropTypes.string, // Type of button (text, contained, TODO: outlined)
   backgroundColor: PropTypes.string, // Button color
   textColor: PropTypes.string, // Text color
+  textDecoration: PropTypes.string, // Text decoration
   round: PropTypes.bool, // Rounded corners
+  height: PropTypes.string, // Button height
   buttonStyle: PropTypes.object, // override button style
   containerStyle: PropTypes.object, // override container style
 };
@@ -101,7 +108,9 @@ Button.defaultProps = {
   type: 'contained',
   backgroundColor: Colors.primary,
   textColor: Colors.primaryContrast,
+  textDecoration: 'none',
   round: false,
+  height: '',
   buttonStyle: {},
   containerStyle: {},
 };
@@ -116,7 +125,7 @@ const styles = {
     flexDirection: 'row',
     borderRadius: 2.5,
     minWidth: 64,
-    padding: 8,
+    padding: 5,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 2 },
     shadowRadius: 5,
