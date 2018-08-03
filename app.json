@@ -1,25 +1,33 @@
 {
   "expo": {
-    "name": "Rehive Wallet",
+    "name": "PXPay",
     "description": "A multi-currency wallet built on the Rehive platform.",
-    "version": "0.10.0",
-    "slug": "rehive-wallet",
+    "version": "0.6.0",
+    "slug": "pxpay",
     "privacy": "public",
     "sdkVersion": "28.0.0",
     "orientation": "portrait",
-    "primaryColor": "#4d4d4d",
-    "icon": "./assets/icons/icon.png",
-    "splash": {
-      "image": "./assets/icons/icon.png",
-      "primaryColor": "#ffffff"
+    "primaryColor": "#ffffff",
+    "icon": "./assets/icons/pxpay_icon_primary.png",
+    "loading": {
+      "icon": "./assets/icons/pxpay_icon_primary.png",
+      "hideExponentText": false
     },
-    "assetBundlePatterns": ["./assets/icons/*"],
+    "packagerOpts": {
+      "assetExts": [
+        "ttf",
+        "mp4"
+      ]
+    },
+    "assetBundlePatterns": [
+      "assets/icons/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.rehive.wallet"
+      "bundleIdentifier": "com.pxpay.wallet"
     },
     "android": {
-      "package": "com.rehive_wallet"
+      "package": "com.pxpay_wallet"
     }
   }
 }

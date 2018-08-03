@@ -1,8 +1,8 @@
 {
   "company": {
     "id": "pxpay_demo",
-    "name": "PXPay Demo",
-    "description": "A PXPay demo company"
+    "name": "PXPay",
+    "description": "Send and receive money easily."
   },
   "services": {
     "bitcoin": false,
@@ -66,6 +66,23 @@
     "requireDocumentAdvID": true
   },
   "colors": {
+    "primary": "#FFFFFF",
+    "secondary": "#4FCBFF",
+    "tertiary": "#00B4FF",
+    "focus": "#4FCBFF",
+
+    "primaryContrast": "#051627",
+    "secondaryContrast": "#FFFFFF",
+    "tertiaryContrast": "#828A93",
+    "focusContrast": "#000000",
+
+    "warning": "#FC8755",
+    "error": "#f44336",
+    "success": "#4CAF50",
+    "positive": "#4CAF50",
+    "negative": "#f44336"
+  },
+  "colors_inverted": {
     "primary": "#051627",
     "secondary": "#005970",
     "tertiary": "#2BB8C2",
@@ -102,31 +119,20 @@
           "description": "This is the demo PX Pay card 2",
           "image": "pxpay",
           "dismiss": true
+        },
+        {
+          "id": "2",
+          "title": "AUD account not verified",
+          "description": "Please, verify your account to start receive and send payments.",
+          "image": false,
+          "dismiss": true,
+          "actionLabel": "VERIFY"
         }
       ]
     }
   },
   "sliders": {
-    "landing": [
-      {
-        "id": "0",
-        "title": "PX Pay",
-        "description": "This is the demo account - PX Pay",
-        "image": "pxpay"
-      },
-      {
-        "id": "1",
-        "title": "PX Pay 2",
-        "description": "This is the demo account - PX Pay",
-        "image": "pxpay"
-      },
-      {
-        "id": "2",
-        "title": "PX Pay 3",
-        "description": "This is the demo account - PX Pay",
-        "image": "pxpay"
-      }
-    ]
+    "landing": []
   },
   "screens": {
     "login": [
