@@ -104,7 +104,7 @@ const PopUpGeneral = props => {
                       <HeaderButton
                         icon={iconTitleRight}
                         onPress={onPressTitleRight}
-                        color="lightgrey"
+                        color="primaryContrast"
                       />
                     </View>
                   ) : null}
@@ -229,7 +229,7 @@ const styles = {
     padding: 8,
   },
   textStyleAction: {
-    color: Colors.primary,
+    color: Colors.primaryContrast,
     fontSize: 14,
     fontWeight: 'bold',
     // padding: 8,

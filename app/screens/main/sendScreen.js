@@ -157,7 +157,7 @@ class SendScreen extends Component {
         textFooterRight={textFooterRight}
         onPressFooterRight={onPressFooterRight}
         loading={sending}
-        color={'focus'}
+        color={'primary'}
         colors={company_config.colors}>
         {this.renderTop()}
         <View style={viewStyleBottomContainer}>{this.renderBottom()}</View>
