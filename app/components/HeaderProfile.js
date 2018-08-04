@@ -26,7 +26,7 @@ class HeaderProfile extends Component {
       textStyleName,
     } = styles;
     return (
-      <View style={[viewStyleContainer, { backgroundColor: colors.primary }]}>
+      <View style={[viewStyleContainer, { backgroundColor: colors.tertiary }]}>
         <TouchableHighlight
           onPress={() => this.setState({ imageUpload: true })}>
           {photoLink ? (
@@ -34,7 +34,7 @@ class HeaderProfile extends Component {
               style={[
                 imageStylePhoto,
                 {
-                  borderColor: Colors.secondary,
+                  borderColor: Colors.quinary,
                 },
               ]}
               source={{
@@ -57,7 +57,7 @@ class HeaderProfile extends Component {
         </TouchableHighlight>
 
         <View style={viewStyleName}>
-          <Text style={[textStyleName, { color: colors.primaryContrast }]}>
+          <Text style={[textStyleName, { color: colors.tertiaryContrast }]}>
             {username ? username : name}
           </Text>
         </View>
@@ -76,19 +76,20 @@ const styles = {
   viewStyleContainer: {
     alignItems: 'center',
     paddingTop: 16,
-    paddingBottom: 8,
-    elevation: 10,
+    paddingBottom: 24,
+    elevation: 4,
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 5,
+    shadowRadius: 4,
     shadowOpacity: 0.3,
     zIndex: 10,
   },
   imageStylePhoto: {
     width: 100,
     height: 100,
+    paddingBottom: 16,
     borderRadius: 50,
-    borderWidth: 5,
+    borderWidth: 1,
   },
   viewStyleName: {
     justifyContent: 'center',
@@ -96,7 +97,7 @@ const styles = {
     padding: 8,
   },
   textStyleName: {
-    fontSize: 16,
+    fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'center',
     justifyContent: 'center',

@@ -47,13 +47,12 @@ class DrawerHeader extends Component {
 
 const styles = {
   viewStyleContainer: {
-    paddingTop: 48,
     padding: 16,
-    paddingBottom: 8,
   },
   imageStylePhoto: {
-    width: 100,
-    height: 100,
+    width: 64,
+    height: 64,
+    paddingBottom: 16,
     borderRadius: 50,
     borderWidth: 1,
   },
@@ -61,12 +60,12 @@ const styles = {
     paddingVertical: 12,
   },
   textStyleName: {
-    fontSize: 14,
-    paddingBottom: 4,
+    fontSize: 16,
     fontWeight: 'bold',
   },
   textStyleEmail: {
     fontSize: 14,
+    opacity: 0.7
   },
 };
 

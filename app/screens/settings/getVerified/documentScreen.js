@@ -106,6 +106,8 @@ class DocumentScreen extends Component {
       <Button
         label={item.description}
         // size="small"
+        textColor={this.props.company_config.colors.secondaryContrast}
+        backgroundColor={this.props.company_config.colors.secondary}
         onPress={() => this.selectType(item.document_type)}
       />
     );
@@ -146,7 +148,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     // justifyContent: 'flex-start',
-    // backgroundColor: 'white',
+    backgroundColor: 'white',
   },
   viewStyleContent: {
     alignItems: 'center',

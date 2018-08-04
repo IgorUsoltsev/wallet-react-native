@@ -63,15 +63,22 @@ export default class Header extends Component {
       headerRightIcon,
       colors,
       home,
+      inverted
     } = this.props;
+
+    const bg = inverted ? colors.primary : colors.tertiary;
+    const text = inverted ? colors.primaryContrast : colors.primary;
+    const icons = inverted ? colors.drawerColor : colors.primary;
+
     return (
       <View
         style={[
           {
-            elevation: 10,
+            //elevation: 10,
+            elevation: 4,
             zIndex: 11,
             paddingTop: Constants.statusBarHeight,
-            backgroundColor: colors.primary,
+            backgroundColor: bg,
           },
           !home
             ? {
@@ -92,7 +99,7 @@ export default class Header extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{ color: 'white', textAlign: 'center' }}>
+              <Text style={{ color: text, textAlign: 'center' }}>
                 Deposits are temporarily disabled.
               </Text>
             </View>
@@ -107,7 +114,7 @@ export default class Header extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{ color: 'white', textAlign: 'center' }}>
+              <Text style={{ color: text, textAlign: 'center' }}>
                 Withdrawals are temporarily disabled.
               </Text>
             </View>
@@ -122,7 +129,7 @@ export default class Header extends Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Text style={{ color: 'white', textAlign: 'center' }}>
+              <Text style={{ color: text, textAlign: 'center' }}>
                 Transactions are temporarily disabled.
               </Text>
             </View>
@@ -135,7 +142,7 @@ export default class Header extends Component {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{ color: 'white' }}>No internet Connection</Text>
+            <Text style={{ color: text }}>No internet Connection</Text>
           </View>
         )}
         {this.state.online && (
@@ -146,7 +153,7 @@ export default class Header extends Component {
               justifyContent: 'center',
               alignItems: 'center',
             }}>
-            <Text style={{ color: 'white' }}>Connected</Text>
+            <Text style={{ color: text }}>Connected</Text>
           </View>
         )}
         <View style={styles.options}>
@@ -155,7 +162,7 @@ export default class Header extends Component {
               <HeaderButton
                 onPress={() => this.props.navigation.openDrawer()}
                 icon="menu"
-                color={Colors.drawerColor}
+                color={icons}
               />
             ) : null}
             {back ? (
@@ -163,14 +170,14 @@ export default class Header extends Component {
                 onPress={() => navigation.goBack()}
                 style={{ padding: 20 }}
                 icon="arrow-back"
-                color={Colors.drawerColor}
+                color={icons}
               />
             ) : null}
           </View>
           <View style={styles.title}>
             {title ? (
               <Text
-                style={[styles.titleText, { fontSize: smallTitle ? 16 : 20 }]}>
+                style={[styles.titleText, { color: text,fontSize: smallTitle ? 16 : 20 }]}>
                 {title}
               </Text>
             ) : null}
@@ -180,6 +187,7 @@ export default class Header extends Component {
               <HeaderButton
                 onPress={() => navigation.navigate('QRCodeScanner')}
                 icon="camera"
+                color={icons}
               />
             ) : null}
             {headerRightText || headerRightIcon ? (
@@ -187,6 +195,7 @@ export default class Header extends Component {
                 text={headerRightText}
                 onPress={headerRightOnPress}
                 icon={headerRightIcon}
+                color={icons}
               />
             ) : null}
           </View>
@@ -218,8 +227,8 @@ const styles = {
     justifyContent: 'center',
   },
   titleText: {
-    color: '#5a5a5a',
     fontSize: 20,
     paddingLeft: 0,
+    textAlign: 'center'
   },
 };

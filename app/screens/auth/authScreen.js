@@ -323,6 +323,7 @@ class AuthScreen extends Component {
                     reference={input => {
                       this.login = input;
                     }}
+                    size="large"
                     onPress={() => this._activateFingerprint()}
                     animation="slideInRight"
                   />
@@ -333,6 +334,7 @@ class AuthScreen extends Component {
                     reference={input => {
                       this.login = input;
                     }}
+                    textDecoration="underline"
                     onPress={() => nextAuthFormState('pin')}
                     animation="slideInRight"
                   />

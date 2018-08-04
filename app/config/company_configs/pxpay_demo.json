@@ -81,7 +81,11 @@
     "error": "#f44336",
     "success": "#4CAF50",
     "positive": "#4CAF50",
-    "negative": "#f44336"
+    "negative": "#f44336",
+
+    "drawerColor": "#4FCBFF",
+
+    "lightGray": "#DFDFDF"
   },
   "colors_inverted": {
     "primary": "#051627",
@@ -100,7 +104,9 @@
     "positive": "#4CAF50",
     "negative": "#f44336",
 
-    "drawerColor": "#4FCBFF"
+    "drawerColor": "#4FCBFF",
+
+    "lightGray": "#DFDFDF"
   },
   "sizes": {
     "btn_default": 16
@@ -108,24 +114,10 @@
   "cards": {
     "home": {
       "general": {
-        "welcome": true,
+        "welcome": false,
         "verify": true
       },
       "custom": [
-        {
-          "id": "0",
-          "title": "PX Pay 1",
-          "description": "This is the demo PX Pay card 1",
-          "image": "pxpay",
-          "dismiss": true
-        },
-        {
-          "id": "1",
-          "title": "PX Pay 2",
-          "description": "This is the demo PX Pay card 2",
-          "image": "pxpay",
-          "dismiss": true
-        },
         {
           "id": "2",
           "title": "AUD account not verified",

@@ -5,16 +5,18 @@ import { NavigationActions, DrawerItems } from 'react-navigation';
 import { ScrollView, Text, View } from 'react-native';
 
 import DrawerHeader from './../components/drawerHeader';
-import DrawerOption from './drawerOption';
+import DrawerOption from './DrawerOption';
 
 class CustomDrawer extends Component {
   render() {
     const { navigation, company_config, profile, activeItemKey } = this.props;
     const { services, colors } = company_config;
 
+    console.log(company_config,colors);
+
     return (
       <View
-        style={[styles.container, { backgroundColor: colors.primaryContrast }]}>
+        style={[styles.container, { backgroundColor: colors.primary }]}>
         <View>
           <DrawerHeader navigation={navigation} colors={colors} />
         </View>
@@ -29,6 +31,7 @@ class CustomDrawer extends Component {
                 address="Home"
                 colors={colors}
               />
+              <View style={{borderBottomColor: colors.lightGray, borderBottomWidth: 1}} />
               <DrawerOption
                 navigation={navigation}
                 activeItemKey={activeItemKey}
@@ -36,6 +39,7 @@ class CustomDrawer extends Component {
                 address="Wallets"
                 colors={colors}
               />
+              <View style={{borderBottomColor: colors.lightGray, borderBottomWidth: 1}} />
               {services.rewards ? (
                 <DrawerOption
                   navigation={navigation}
@@ -49,7 +53,7 @@ class CustomDrawer extends Component {
               <DrawerOption
                 navigation={navigation}
                 activeItemKey={activeItemKey}
-                name="Get verified"
+                name="Verification"
                 address="GetVerified"
                 colors={colors}
               />
@@ -61,6 +65,7 @@ class CustomDrawer extends Component {
                 address="Settings"
                 colors={colors}
               />
+              <View style={{borderBottomColor: colors.lightGray, borderBottomWidth: 1}} />
               <DrawerOption
                 navigation={navigation}
                 activeItemKey={activeItemKey}
@@ -101,6 +106,8 @@ const styles = {
   container: {
     flex: 1,
   },
+  navSectionStyle: {
+  }
 };
 
 const mapStateToProps = ({ auth, user }) => {
