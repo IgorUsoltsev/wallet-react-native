@@ -26,6 +26,7 @@ import {
   showFingerprintModal,
   verifyMFA,
   toggleTerms,
+  logoutUser,
 } from '../../redux/actions';
 
 import Colors from './../../config/colors';
@@ -65,6 +66,7 @@ class AuthScreen extends Component {
     const colors = company_config ? company_config.colors : Colors;
 
     let iconHeaderLeft = 'arrow-back';
+    let textHeaderLeft = '';
     let onPressHeaderLeft = () => {
       this.props.previousAuthFormState(this.props);
     };
@@ -106,16 +108,14 @@ class AuthScreen extends Component {
         break;
       case 'pin':
         textFooterRight = '';
-        if (detailState === 'pin' || 'fingerprint') {
-          onPressHeaderLeft = () => this.props.navigation.navigate('Logout');
-        } else {
-          iconHeaderLeft = '';
+        if (detailState !== ('pin' || 'fingerprint')) {
+          break;
         }
-        break;
       case 'mfa':
       case 'verification':
-      case 'pin':
-        onPressHeaderLeft = () => this.props.navigation.navigate('Logout');
+        iconHeaderLeft = '';
+        textHeaderLeft = 'Log out';
+        onPressHeaderLeft = () => this.props.logoutUser();
       default:
     }
     if (skip) {
@@ -127,6 +127,7 @@ class AuthScreen extends Component {
       <FullScreenForm
         iconHeaderLeft={iconHeaderLeft}
         onPressHeaderLeft={onPressHeaderLeft}
+        textHeaderLeft={textHeaderLeft}
         textHeaderRight={textHeaderRight}
         onPressHeaderRight={onPressHeaderRight}
         textFooterRight={textFooterRight}
@@ -743,4 +744,5 @@ export default connect(mapStateToProps, {
   setPin,
   verifyMFA,
   toggleTerms,
+  logoutUser,
 })(AuthScreen);

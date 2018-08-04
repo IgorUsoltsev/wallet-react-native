@@ -68,7 +68,7 @@ class ReceiveScreen extends Component {
       type === 'email'
         ? user.email
         : 'GANOZF7TIDYZ7MGRVVMAJHBQ7JCWRNRDHPY6N4W5OWU2JWNMQ2D67NVQ';
-    Clipboard.setString();
+    Clipboard.setString(value);
     Toast.show({
       text:
         value +

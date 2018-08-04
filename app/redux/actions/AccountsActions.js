@@ -136,6 +136,7 @@ export const send = sendData => async dispatch => {
         break;
       case 'stellar':
         data['to_reference'] = data.recipient;
+        data['memo'] = sendData.memo;
         delete data.debit_account;
         delete data.recipient;
         console.log(data);

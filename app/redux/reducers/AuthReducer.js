@@ -87,6 +87,7 @@ export default (state = INITIAL_STATE, action) => {
         detailState: action.payload.detailState,
         password: '',
         loading: false,
+        token: action.payload.mainState === 'landing' ? '' : state.token,
       };
     case INIT.fail:
       return {
@@ -116,7 +117,6 @@ export default (state = INITIAL_STATE, action) => {
 
     case UPDATE_AUTH_FORM_STATE:
       const { mainState, detailState, authError, skip, terms } = action.payload;
-      console.log(terms);
       return {
         ...state,
         mainState,
@@ -125,7 +125,7 @@ export default (state = INITIAL_STATE, action) => {
         skip,
         terms,
         termsChecked: false,
-        password: '',
+        password: detailState === 'terms' ? state.password : '',
         loading: false,
       };
 

@@ -28,8 +28,7 @@ class SettingsContainer extends Component {
 const styles = {
   viewStyleContainer: {
     flexDirection: 'column',
-    paddingHorizontal: 8,
-    paddingBottom: 24,
+    padding: 8,
   },
   viewStyleLabel: {
     flexDirection: 'row',

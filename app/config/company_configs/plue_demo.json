@@ -1,13 +1,13 @@
 {
   "company": {
-    "id": "test_company_1",
-    "name": "Test Company 1",
-    "description": "A demo company on the Rehive platform"
+    "id": "plue_demo",
+    "name": "Demo Plue Company",
+    "description": "A demo Plue company on the Rehive platform"
   },
   "services": {
-    "bitcoin": false,
+    "bitcoin": true,
     "stellar": true,
-    "ethereum": false,
+    "ethereum": true,
     "rewards": true
   },
   "auth": {
@@ -32,8 +32,8 @@
     "last_name": true,
     "username": true,
     "country": false,
-    "pin": "",
-    "mfa": ""
+    "pin": "required",
+    "mfa": "required"
   },
   "pin": {
     "appLoad": true,
@@ -65,12 +65,12 @@
     "requireDocumentAdvID": true
   },
   "colors": {
-    "primary": "#4d4d4d",
-    "secondary": "#a6a6a6",
+    "primary": "#002D6D",
+    "secondary": "#6180BE",
     "tertiary": "#c4c4c4",
-    "focus": "#9797F0",
+    "focus": "#EC4257",
 
-    "primaryContrast": "#f3f3f3",
+    "primaryContrast": "#f6f6f6",
     "secondaryContrast": "#2d2d2d",
     "tertiaryContrast": "#000000",
     "focusContrast": "#2d2d2d",
@@ -111,7 +111,19 @@
         "id": 0,
         "title": "Slide 1",
         "description": "This is your custom text for slide 1",
-        "image": "card1"
+        "image": "plue"
+      },
+      {
+        "id": 1,
+        "title": "Slide 2",
+        "description": "This is your custom text for slide 2",
+        "image": "plue"
+      },
+      {
+        "id": 2,
+        "title": "Slide 3",
+        "description": "This is your custom text for slide 3",
+        "image": "plue"
       }
     ]
   },

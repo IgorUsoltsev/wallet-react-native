@@ -26,6 +26,7 @@ const FullScreenForm = props => {
     onPressFooterLeft,
     textFooterRight,
     onPressFooterRight,
+    textHeaderLeft,
     loading,
     color,
     colors,
@@ -37,7 +38,7 @@ const FullScreenForm = props => {
         <Spinner size="large" />
       ) : (
         <View style={{ flex: 1 }}>
-          {iconHeaderLeft || textHeaderRight ? (
+          {iconHeaderLeft || textHeaderRight || textHeaderLeft ? (
             <View style={viewStyleHeader}>
               {iconHeaderLeft ? (
                 <HeaderButton
@@ -45,6 +46,16 @@ const FullScreenForm = props => {
                   onPress={onPressHeaderLeft}
                   color={colors[color + 'Contrast']}
                 />
+              ) : textHeaderLeft ? (
+                <TouchableOpacity onPress={onPressHeaderLeft}>
+                  <Text
+                    style={[
+                      textStyleAction,
+                      { color: colors[color + 'Contrast'] },
+                    ]}>
+                    {textHeaderLeft}
+                  </Text>
+                </TouchableOpacity>
               ) : (
                 <View />
               )}

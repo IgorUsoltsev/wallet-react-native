@@ -1,14 +1,15 @@
 {
   "company": {
-    "id": "test_company_1",
-    "name": "Test Company 1",
-    "description": "A demo company on the Rehive platform"
+    "id": "tokens01",
+    "name": "Crypto & Token Demo Company 1",
+    "description":
+      "A demo company on the Rehive platform with the  Ethereum, Bitcoin and Stellar (with custom tokens) services"
   },
   "services": {
-    "bitcoin": false,
+    "bitcoin": true,
     "stellar": true,
-    "ethereum": false,
-    "rewards": true
+    "ethereum": true,
+    "rewards": false
   },
   "auth": {
     "identifier": "email",
@@ -32,8 +33,8 @@
     "last_name": true,
     "username": true,
     "country": false,
-    "pin": "",
-    "mfa": ""
+    "pin": "required",
+    "mfa": "optional"
   },
   "pin": {
     "appLoad": true,
@@ -111,6 +112,18 @@
         "id": 0,
         "title": "Slide 1",
         "description": "This is your custom text for slide 1",
+        "image": "card1"
+      },
+      {
+        "id": 1,
+        "title": "Slide 2",
+        "description": "This is your custom text for slide 2",
+        "image": "card1"
+      },
+      {
+        "id": 2,
+        "title": "Slide 3",
+        "description": "This is your custom text for slide 3",
         "image": "card1"
       }
     ]

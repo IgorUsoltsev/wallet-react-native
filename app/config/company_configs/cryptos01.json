@@ -1,39 +1,34 @@
 {
   "company": {
-    "id": "test_company_1",
-    "name": "Test Company 1",
-    "description": "A demo company on the Rehive platform"
+    "id": "cryptos01",
+    "name": "Crypto Demo Company 1",
+    "description":
+      "A demo company on the Rehive platform with the Ethereum, Bitcoin and Stellar services"
   },
   "services": {
-    "bitcoin": false,
+    "bitcoin": true,
     "stellar": true,
-    "ethereum": false,
-    "rewards": true
+    "ethereum": true,
+    "rewards": false
   },
   "auth": {
     "identifier": "email",
-    "email": "required",
+    "email": "optional",
     "mobile": "",
     "terms": [
       {
         "id": 0,
-        "title": "Privacy Policy",
-        "description": "Click here to read more on the privacy policy",
-        "link": ""
-      },
-      {
-        "id": 1,
         "title": "User Agreement",
         "description": "Click here to read more on the user agreement",
         "link": ""
       }
     ],
-    "first_name": true,
-    "last_name": true,
+    "first_name": false,
+    "last_name": false,
     "username": true,
     "country": false,
-    "pin": "",
-    "mfa": ""
+    "pin": "optional",
+    "mfa": "optional"
   },
   "pin": {
     "appLoad": true,
@@ -111,6 +106,18 @@
         "id": 0,
         "title": "Slide 1",
         "description": "This is your custom text for slide 1",
+        "image": "card1"
+      },
+      {
+        "id": 1,
+        "title": "Slide 2",
+        "description": "This is your custom text for slide 2",
+        "image": "card1"
+      },
+      {
+        "id": 2,
+        "title": "Slide 3",
+        "description": "This is your custom text for slide 3",
         "image": "card1"
       }
     ]

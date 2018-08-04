@@ -92,9 +92,9 @@ function* init() {
         try {
           const token = yield select(getToken);
           if (token) {
-            // yield call(Rehive.verifyToken, token);
+            yield call(Rehive.verifyToken, token);
             yield call(Rehive.initWithToken, token);
-            yield call(Rehive.getProfile);
+            // yield call(Rehive.getProfile);
             if (company_config.pin.appLoad) {
               const { pin, fingerprint } = yield select(getAuth);
               if (pin || fingerprint) {
@@ -151,6 +151,7 @@ function* authFlow() {
     let token = '';
     let user = {};
     let terms_and_conditions = false;
+    let data = {};
     while (true) {
       // permanent loop that waits for a state transition action from the auth screen
       const action = yield take(NEXT_AUTH_FORM_STATE);
@@ -165,7 +166,6 @@ function* authFlow() {
         password,
         company_config,
       } = yield select(getAuth);
-      const terms = company_config.auth.terms;
       // if no state changes are made stay in current state
       let nextMainState = mainState;
       let nextDetailState = detailState;
@@ -179,7 +179,7 @@ function* authFlow() {
             // Tries to dummy register a user for company which validates if company exists
             // TODO: this should be revised, but requires platform improvements
             yield put({ type: LOADING });
-            yield call(Rehive.register, { company: tempCompany });
+            yield call(Rehive.register, { company: tempCompany.toLowerCase() });
           } catch (error) {
             console.log(error);
             if (error.data && error.data.company) {
@@ -235,7 +235,11 @@ function* authFlow() {
                   data = { company, user, password };
                   try {
                     yield put({ type: LOADING });
-                    ({ user, token } = yield call(Rehive.login, data));
+                    console.log('data', data);
+                    const tempResp = yield call(Rehive.login, data);
+                    console.log('tempResp', tempResp);
+                    ({ user, token } = tempResp);
+                    console.log(token);
                     yield call(Rehive.initWithToken, token); // initialises sdk with new token
                     yield put({
                       type: LOGIN_USER_ASYNC.success,
@@ -249,6 +253,7 @@ function* authFlow() {
                     });
                     return;
                   } catch (error) {
+                    console.log('initWithToken', error);
                     authError = error.message;
                     nextDetailState = company_config.auth.identifier;
                   }
@@ -263,59 +268,51 @@ function* authFlow() {
               authError = validateEmail(email);
               if (!authError) {
                 user = email;
-                if (terms && terms.length > 0) {
-                  if (yield call(termsFlow)) {
-                    terms_and_conditions = true;
-                    nextDetailState = 'password';
-                  }
-                } else {
-                  nextDetailState = 'password';
-                }
+                nextDetailState = 'password';
               }
               break;
             case 'mobile':
               authError = validateMobile(mobile);
               if (!authError) {
                 user = mobile;
-                if (terms && terms.length > 0) {
-                  if (yield call(termsFlow)) {
-                    terms_and_conditions = true;
-                    nextDetailState = 'password';
-                  }
-                } else {
-                  nextDetailState = 'password';
-                }
+                nextDetailState = 'password';
               }
               break;
             case 'password':
               authError = validatePassword(password);
               if (!authError) {
-                data = {
-                  company,
-                  email,
-                  password1: password,
-                  password2: password,
-                  terms_and_conditions,
-                };
-                try {
-                  yield put({ type: LOADING });
-                  console.log(data);
-                  ({ user, token } = yield call(Rehive.register, data));
-                  yield call(Rehive.initWithToken, token); // initialises sdk with new token
-                  yield put({
-                    type: LOGIN_USER_ASYNC.success,
-                    payload: user,
-                  });
-                  yield take(POST_AUTH_FLOW_FINISH);
-                  // waits for postAuthFlow to complete, when complete stores token and exists auth flow
-                  yield put({
-                    type: AUTH_COMPLETE,
-                    payload: { user, token },
-                  });
-                  return;
-                } catch (error) {
-                  authError = error.message;
-                  nextDetailState = company_config.auth.identifier;
+                const terms = company_config.auth.terms;
+                if (terms && terms.length > 0) {
+                  if (yield call(termsFlow)) {
+                    terms_and_conditions = true;
+                    data = {
+                      company,
+                      email,
+                      password1: password,
+                      password2: password,
+                      terms_and_conditions,
+                    };
+                    ({ authError, nextDetailState } = yield call(
+                      registerFlow,
+                      data,
+                    ));
+                  } else {
+                    const tempAuth = yield select(getAuth);
+                    nextMainState = tempAuth.mainState;
+                    nextDetailState = tempAuth.detailState;
+                  }
+                } else {
+                  data = {
+                    company,
+                    email,
+                    password1: password,
+                    password2: password,
+                    terms_and_conditions,
+                  };
+                  ({ authError, nextDetailState } = yield call(
+                    registerFlow,
+                    data,
+                  ));
                 }
               }
               break;
@@ -334,7 +331,7 @@ function* authFlow() {
       });
     }
   } catch (error) {
-    console.log(error);
+    console.log('authFlow', error);
   }
 }
 
@@ -368,9 +365,39 @@ function* termsFlow() {
       }
     }
   } catch (error) {
-    console.log(error);
+    console.log('termsFlow', error);
   }
   return true;
+}
+
+function* registerFlow(data) {
+  console.log('registerFlow');
+  let authError = '';
+  let nextDetailState = '';
+  let user = {};
+  let token = '';
+  try {
+    yield put({ type: LOADING });
+    ({ user, token } = yield call(Rehive.register, data));
+    yield call(Rehive.initWithToken, token); // initialises sdk with new token
+    yield put({
+      type: LOGIN_USER_ASYNC.success,
+      payload: user,
+    });
+    yield take(POST_AUTH_FLOW_FINISH);
+    // waits for postAuthFlow to complete, when complete stores token and exists auth flow
+    yield put({
+      type: AUTH_COMPLETE,
+      payload: { user, token },
+    });
+    // return { success: true };
+  } catch (error) {
+    console.log('registerFlow', error);
+    const { company_config } = yield select(getAuth);
+    authError = error.message;
+    nextDetailState = company_config.auth.identifier;
+  }
+  return { authError, nextDetailState };
 }
 
 /* POST AUTH FLOW */
@@ -381,7 +408,8 @@ function* termsFlow() {
 function* postAuthFlow() {
   console.log('postAuthFlow');
   try {
-    while (true) {
+    let run = true;
+    while (run) {
       const { mainState, detailState, company_config } = yield select(getAuth);
       let nextMainState = mainState;
       let nextDetailState = detailState;
@@ -447,11 +475,16 @@ function* postAuthFlow() {
                 yield put({ type: POST_NOT_LOADING });
                 const action = yield take(NEXT_AUTH_FORM_STATE);
                 yield put({ type: POST_LOADING });
+                console.log('action', action.payload.nextFormState);
                 if (action.payload.nextFormState === 'skip') {
                   nextDetailState = 'email';
                   if (company_config.auth.email === 'optional') {
                     skip = true;
                   }
+                } else if (action.payload.nextFormState) {
+                  console.log('hi');
+                  run = false;
+                  break;
                 }
                 let resp = yield call(Rehive.getProfile);
                 yield put({ type: AUTH_STORE_USER, payload: resp });
@@ -470,9 +503,14 @@ function* postAuthFlow() {
                 yield put({ type: POST_NOT_LOADING });
                 const action = yield take(NEXT_AUTH_FORM_STATE);
                 yield put({ type: POST_LOADING });
+                console.log('action', action.payload.nextFormState);
                 if (action.payload.nextFormState === 'skip') {
                   nextDetailState = 'first_name';
                 }
+                // else if (action.payload.nextFormState) {
+                //   run = false;
+                //   break;
+                // }
                 let resp = yield call(Rehive.getProfile);
                 yield put({ type: AUTH_STORE_USER, payload: resp });
               } else {
@@ -514,8 +552,15 @@ function* postAuthFlow() {
                 yield put({ type: POST_LOADING });
                 const { username } = yield select(getAuth);
                 if (username) {
-                  user = yield call(Rehive.updateProfile, { username });
-                  yield put({ type: AUTH_STORE_USER, payload: user });
+                  try {
+                    let resp = yield call(Rehive.updateProfile, { username });
+                    yield call(Rehive.setStellarUsername, {
+                      username,
+                    });
+                    yield put({ type: AUTH_STORE_USER, payload: resp });
+                  } catch (error) {
+                    authError = resp.message;
+                  }
                 }
               } else {
                 // nextDetailState = 'country';
@@ -623,6 +668,13 @@ function* appLoad() {
       count++;
     }
     if (services.stellar) {
+      let resp = yield call(Rehive.getStellarUser);
+      if (resp.data && !resp.data.username) {
+        const { user } = yield select(getAuth);
+        yield call(Rehive.setStellarUsername, {
+          username: user.username,
+        });
+      }
       count++;
     }
     if (services.bitcoin) {
@@ -631,6 +683,7 @@ function* appLoad() {
     if (services.ethereum) {
       count++;
     }
+
     let actions = [
       put({ type: POST_LOADING }),
       put({ type: FETCH_ACCOUNTS_ASYNC.pending }),

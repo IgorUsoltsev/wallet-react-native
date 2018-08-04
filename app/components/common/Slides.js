@@ -37,7 +37,7 @@ class Slides extends Component {
             source={
               slide.image === 'pxpay'
                 ? require('./../../../assets/icons/pxpay1.png')
-                : require('./../../../assets/icons/card1.png')
+                : require('./../../../assets/icons/card1_transparent.png')
             }
           />
           <Text style={textStyleTitle}>{slide.title}</Text>

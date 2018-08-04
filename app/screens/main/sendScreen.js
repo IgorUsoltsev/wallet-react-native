@@ -72,6 +72,7 @@ class SendScreen extends Component {
       sendRecipient,
       sendNote,
       sendType,
+      sendMemo,
     } = this.props;
 
     let data = {
@@ -79,6 +80,7 @@ class SendScreen extends Component {
       amount: sendAmount,
       recipient: sendRecipient,
       note: sendNote,
+      memo: sendMemo,
       currency: sendWallet.currency.currency,
       reference: sendWallet.account_reference,
     };

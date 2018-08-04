@@ -57,7 +57,7 @@
   },
   "verification": {
     "requirePersonal": true,
-    "requireAddress": false,
+    "requireAddress": true,
     "requireMobile": true,
     "requireEmail": true,
     "requireDocumentID": true,

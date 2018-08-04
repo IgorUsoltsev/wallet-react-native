@@ -189,6 +189,12 @@ export const getCompanyConfig = company => {
 export const getStellarAssets = () =>
   callApi('GET', stellar_service_url + '/company/assets/');
 
+export const setStellarUsername = data =>
+  callApi('POST', stellar_service_url + '/user/username/set/', data);
+
+export const getStellarUser = () =>
+  callApi('GET', stellar_service_url + '/user/');
+
 // export const createTransferStellar = data =>
 //   Promise.resolve(
 //     callApi('POST', stellar_service_url + '/transactions/send/', data)
