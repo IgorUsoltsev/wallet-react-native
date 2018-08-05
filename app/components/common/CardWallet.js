@@ -61,7 +61,6 @@ const CardWallet = props => {
     swipeableContent,
     colors,
   } = props;
-
   return (
     <View style={[viewStyleCardContainer, {backgroundColor: Colors.secondary}]}>
       {/* <Swipeable rightContent={swipeableContent}> */}

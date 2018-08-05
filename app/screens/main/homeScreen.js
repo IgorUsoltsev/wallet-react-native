@@ -10,7 +10,7 @@ import {
 import Swiper from 'react-native-swiper';
 
 import Header from './../../components/header';
-import HeaderWallet from '../../components/headerWallet';
+import HeaderWalletList from '../../components/headerWalletList';
 import TransactionList from './../../components/TransactionList';
 import HomeCards from './../../components/HomeCards';
 
@@ -41,6 +41,8 @@ class HomeScreen extends Component {
       wallets,
       activeWalletIndex,
       fetchAccounts,
+      tempWallet,
+      loadingAccounts,
       company_config,
     } = this.props;
 
@@ -55,15 +57,13 @@ class HomeScreen extends Component {
           inverted={true}
           // noAccounts={this.state.noAccounts}
         />
-        <HeaderWallet
+        <HeaderWalletList
           wallets={wallets}
-          buttons={[
-            { id: 0, type: 'receive' },
-            { id: 1, type: 'send' },
-            { id: 2, type: 'more' },
-          ]}
           navigation={this.props.navigation}
           colors={company_config.colors}
+          tempWallet={tempWallet}
+          loadingAccounts={loadingAccounts}
+          company_bank_account={this.props.company_bank_account}
         />
         {/* currency={item} accountLabel={account.name} /> */}
         {/* {this.renderAccounts()} */}
@@ -101,10 +101,11 @@ const styles = {
   },
 };
 
-const mapStateToProps = ({ auth, accounts }) => {
+const mapStateToProps = ({ auth, accounts, user }) => {
   const { token, company_config } = auth;
-  const { wallets, activeWalletIndex, loadingAccounts } = accounts;
-  return { token, company_config, wallets, activeWalletIndex, loadingAccounts };
+  const { company_bank_account } = user;
+  const { wallets, activeWalletIndex, tempWallet, loadingAccounts } = accounts;
+  return { token, company_config, wallets, activeWalletIndex, tempWallet, loadingAccounts, company_bank_account };
 };
 
 export default connect(mapStateToProps, { logoutUser, fetchAccounts })(
