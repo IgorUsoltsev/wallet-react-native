@@ -12,8 +12,6 @@ class CustomDrawer extends Component {
     const { navigation, company_config, profile, activeItemKey } = this.props;
     const { services, colors } = company_config;
 
-    console.log(company_config,colors);
-
     return (
       <View
         style={[styles.container, { backgroundColor: colors.primary }]}>

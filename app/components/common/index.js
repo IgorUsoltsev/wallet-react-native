@@ -1,5 +1,6 @@
 export * from './Button';
 export * from './Card';
+export * from './CardWallet';
 // export * from './CardList';
 export * from './FullScreenForm';
 export * from './Input';

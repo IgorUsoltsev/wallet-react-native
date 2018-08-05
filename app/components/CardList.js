@@ -25,7 +25,7 @@ import {
 } from './../redux/actions';
 import { standardizeString } from './../util/general';
 
-import { Card, PopUpGeneral, EmptyListMessage, CodeInput } from './common';
+import { Card, CardWallet, PopUpGeneral, EmptyListMessage, CodeInput } from './common';
 
 // make component
 class CardList extends Component {
@@ -74,77 +74,151 @@ class CardList extends Component {
       resendVerification,
       colors,
     } = this.props;
-    return (
-      <Card
-        colors={colors}
-        headerComponent={headerComponent}
-        onPressHeader={onPressHeader}
-        textTitleLeft={textTitleLeft ? textTitleLeft(item) : ''}
-        iconTitleLeft={iconTitleLeft}
-        itemActive={itemActive ? itemActive(item) : false}
-        onPressTitleLeft={() =>
-          onPressTitleLeft
-            ? onPressTitleLeft(item)
-            : canActive ? activeItem(item) : null
-        }
-        title={title ? title(item) : ''}
-        subtitle={subtitle ? subtitle(item) : ''}
-        colorTitleBackground="white"
-        onPressTitle={() =>
-          onPressTitle
-            ? onPressTitle(item)
-            : canEdit ? editItem(type, item) : null
-        }
-        onPressContent={() =>
-          onPressContent
-            ? onPressContent(item)
-            : canEdit ? editItem(type, item) : null
-        }
-        iconFooter={
-          iconFooter
-            ? iconFooter
-            : canDelete ? (!item.primary ? 'delete' : '') : ''
-        }
-        onPressFooter={
-          onPressFooter
-            ? onPressFooter
-            : canDelete
-              ? (itemActive ? !itemActive(item) : true)
-                ? () => deleteItem(type, item)
-                : null
-              : null
-        }
-        textActionTwo={
-          textActionTwo
-            ? textActionTwo
-            : canVerify ? (!item.verified ? 'VERIFY' : 'Verified') : ''
-        }
-        disableActionTwo={canVerify ? (!item.verified ? false : true) : false}
-        onPressActionTwo={() =>
-          onPressActionTwo
-            ? onPressActionTwo(item)
-            : canVerify
-              ? resendVerification(type, item[identifier], profile.company)
-              : null
-        }
-        textActionOne={
-          textActionOne
-            ? textActionOne
-            : canPrimary ? (item.primary ? 'Primary' : 'MAKE PRIMARY') : ''
-        }
-        disableActionOne={canPrimary ? (!item.primary ? false : true) : false}
-        onPressActionOne={() =>
-          onPressActionOne
-            ? onPressActionOne(item)
-            : canPrimary ? primaryItem(type, item) : null
-        }
-        // backgroundColor={canPrimary ? (item.primary ? 'focus' : '') : ''}
-        loading={loadingDetail}
-        // swipeableContent={<Text>Pull to activate</Text>}
-      >
-        {renderContent ? renderContent(item) : null}
-      </Card>
-    );
+    if(type && type == 'wallet'){
+      return (
+          <CardWallet
+              colors={colors}
+              headerComponent={headerComponent}
+              onPressHeader={onPressHeader}
+              textTitleLeft={textTitleLeft ? textTitleLeft(item) : ''}
+              iconTitleLeft={iconTitleLeft}
+              itemActive={itemActive ? itemActive(item) : false}
+              onPressTitleLeft={() =>
+                  onPressTitleLeft
+                      ? onPressTitleLeft(item)
+                      : canActive ? activeItem(item) : null
+              }
+              title={title ? title(item) : ''}
+              subtitle={subtitle ? subtitle(item) : ''}
+              colorTitleBackground="#4FCBFF"
+              onPressTitle={() =>
+                  onPressTitle
+                      ? onPressTitle(item)
+                      : canEdit ? editItem(type, item) : null
+              }
+              onPressContent={() =>
+                  onPressContent
+                      ? onPressContent(item)
+                      : canEdit ? editItem(type, item) : null
+              }
+              iconFooter={
+                iconFooter
+                    ? iconFooter
+                    : canDelete ? (!item.primary ? 'delete' : '') : ''
+              }
+              onPressFooter={
+                onPressFooter
+                    ? onPressFooter
+                    : canDelete
+                    ? (itemActive ? !itemActive(item) : true)
+                        ? () => deleteItem(type, item)
+                        : null
+                    : null
+              }
+              textActionTwo={
+                textActionTwo
+                    ? textActionTwo
+                    : canVerify ? (!item.verified ? 'VERIFY' : 'Verified') : ''
+              }
+              disableActionTwo={canVerify ? (!item.verified ? false : true) : false}
+              onPressActionTwo={() =>
+                  onPressActionTwo
+                      ? onPressActionTwo(item)
+                      : canVerify
+                      ? resendVerification(type, item[identifier], profile.company)
+                      : null
+              }
+              textActionOne={
+                textActionOne
+                    ? textActionOne
+                    : canPrimary ? (item.primary ? 'Primary' : 'MAKE PRIMARY') : ''
+              }
+              disableActionOne={canPrimary ? (!item.primary ? false : true) : false}
+              onPressActionOne={() =>
+                  onPressActionOne
+                      ? onPressActionOne(item)
+                      : canPrimary ? primaryItem(type, item) : null
+              }
+              // backgroundColor={canPrimary ? (item.primary ? 'focus' : '') : ''}
+              loading={loadingDetail}
+              // swipeableContent={<Text>Pull to activate</Text>}
+          >
+            {renderContent ? renderContent(item) : null}
+          </CardWallet>
+      );
+    }else{
+      return (
+          <Card
+              colors={colors}
+              headerComponent={headerComponent}
+              onPressHeader={onPressHeader}
+              textTitleLeft={textTitleLeft ? textTitleLeft(item) : ''}
+              iconTitleLeft={iconTitleLeft}
+              itemActive={itemActive ? itemActive(item) : false}
+              onPressTitleLeft={() =>
+                  onPressTitleLeft
+                      ? onPressTitleLeft(item)
+                      : canActive ? activeItem(item) : null
+              }
+              title={title ? title(item) : ''}
+              subtitle={subtitle ? subtitle(item) : ''}
+              colorTitleBackground="white"
+              onPressTitle={() =>
+                  onPressTitle
+                      ? onPressTitle(item)
+                      : canEdit ? editItem(type, item) : null
+              }
+              onPressContent={() =>
+                  onPressContent
+                      ? onPressContent(item)
+                      : canEdit ? editItem(type, item) : null
+              }
+              iconFooter={
+                iconFooter
+                    ? iconFooter
+                    : canDelete ? (!item.primary ? 'delete' : '') : ''
+              }
+              onPressFooter={
+                onPressFooter
+                    ? onPressFooter
+                    : canDelete
+                    ? (itemActive ? !itemActive(item) : true)
+                        ? () => deleteItem(type, item)
+                        : null
+                    : null
+              }
+              textActionTwo={
+                textActionTwo
+                    ? textActionTwo
+                    : canVerify ? (!item.verified ? 'VERIFY' : 'Verified') : ''
+              }
+              disableActionTwo={canVerify ? (!item.verified ? false : true) : false}
+              onPressActionTwo={() =>
+                  onPressActionTwo
+                      ? onPressActionTwo(item)
+                      : canVerify
+                      ? resendVerification(type, item[identifier], profile.company)
+                      : null
+              }
+              textActionOne={
+                textActionOne
+                    ? textActionOne
+                    : canPrimary ? (item.primary ? 'Primary' : 'MAKE PRIMARY') : ''
+              }
+              disableActionOne={canPrimary ? (!item.primary ? false : true) : false}
+              onPressActionOne={() =>
+                  onPressActionOne
+                      ? onPressActionOne(item)
+                      : canPrimary ? primaryItem(type, item) : null
+              }
+              // backgroundColor={canPrimary ? (item.primary ? 'focus' : '') : ''}
+              loading={loadingDetail}
+              // swipeableContent={<Text>Pull to activate</Text>}
+          >
+            {renderContent ? renderContent(item) : null}
+          </Card>
+      );
+    }
   };
 
   renderEmptyList() {
@@ -264,6 +338,7 @@ class CardList extends Component {
       loadingDetail,
       onPressActionTwo,
       onRefresh,
+      renderHeader,
       // redux actions
       updateItem,
       fetchData,
@@ -285,6 +360,8 @@ class CardList extends Component {
             <Card
               colors={colors}
               key={type}
+              type={type}
+              renderHeader={renderHeader}
               title={wallet ? '' : title ? title(tempItem) : ''}
               colorTitleBackground="white"
               subtitle={wallet ? '' : subtitle ? subtitle(tempItem) : ''}

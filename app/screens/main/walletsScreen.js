@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View,Text } from 'react-native';
 import { connect } from 'react-redux';
 import {
   fetchAccounts,
@@ -88,10 +88,17 @@ class WalletsScreen extends Component {
         item.currency.currency.divisibility,
       ).toFixed(item.currency.currency.divisibility);
 
+    //@todo: replace color '#FFFFFF' with dynamic company color
     return (
       <View style={styles.viewStyleContainer}>
-        <Output label="Balance" value={balance} />
-        <Output label="Available" value={available} />
+        <View style={styles.cardLabelWrapper}>
+          <Text style={[styles.cardLabel, {color: '#FFFFFF'}]}>Balance</Text>
+          <Text style={[styles.cardValue, {color: '#FFFFFF'}]}>{balance}</Text>
+        </View>
+        <View style={styles.cardLabelWrapper}>
+          <Text style={[styles.cardLabel, {color: '#FFFFFF'}]}>Available</Text>
+          <Text style={[styles.cardValue, {color: '#FFFFFF'}]}>{available}</Text>
+        </View>
       </View>
     );
   }
@@ -186,9 +193,6 @@ class WalletsScreen extends Component {
 }
 
 const styles = {
-  viewStyleContainer: {
-    paddingLeft: 8,
-  },
   viewStyleDetailCard: {
     flex: 1,
     backgroundColor: '#ffffff',
@@ -208,6 +212,17 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
   },
+  cardLabelWrapper: {
+    flex: 1,
+    marginTop: 4
+  },
+  cardLabel: {
+    opacity: 0.7
+  },
+  cardValue: {
+    fontSize: 24,
+    fontWeight: 'bold'
+  }
 };
 
 const mapStateToProps = ({ accounts, user, auth }) => {

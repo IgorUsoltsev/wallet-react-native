@@ -22,7 +22,7 @@ const Stack = {
 };
 
 const drawerNavigator = createDrawerNavigator(Stack, {
-  drawerWidth: 200,
+  drawerWidth: 270,
   drawerOpenRoute: 'DrawerOpen',
   drawerCloseRoute: 'DrawerClose',
   drawerToggleRoute: 'DrawerToggle',
