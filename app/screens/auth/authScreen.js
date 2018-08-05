@@ -43,6 +43,7 @@ import {
 } from './../../components/common';
 import { standardizeString } from './../../util/general';
 import client from './../../config/client';
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -277,7 +278,12 @@ class AuthScreen extends Component {
           case 'fingerprint':
             this._scanFingerprint();
             return (
-              <View style={viewStyleLanding}>
+              <View style={[viewStyleLanding,{alignItems: 'center'}]}>
+                <Icon
+                    name={'fingerprint'}
+                    size={48}
+                    color={colors.secondary}
+                />
                 <Text style={[textStyle, { color: colors.primaryContrast }]}>
                   Please scan fingerprint
                 </Text>
