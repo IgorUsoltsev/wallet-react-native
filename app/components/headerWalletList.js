@@ -227,7 +227,6 @@ const styles = {
     padding: 16,
     paddingBottom: 0,
     color: Colors.titleColor
-
   },
   container: {
     flex: 1,

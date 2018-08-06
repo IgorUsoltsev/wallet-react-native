@@ -13,6 +13,7 @@ import Header from './../../components/header';
 import HeaderWalletList from '../../components/headerWalletList';
 import TransactionList from './../../components/TransactionList';
 import HomeCards from './../../components/HomeCards';
+import Colors from "../../config/colors";
 
 const renderPagination = (index, total, context) => {
   return (
@@ -68,19 +69,21 @@ class HomeScreen extends Component {
         {/* currency={item} accountLabel={account.name} /> */}
         {/* {this.renderAccounts()} */}
         <Swiper renderPagination={renderPagination} loop={false}>
-          {/* <View style={{ flex: 1 }} /> */}
-          <HomeCards navigation={this.props.navigation} />
-          <TransactionList
-            // updateBalance={this.getBalanceInfo}
-            // fetchAccounts={fetchAccounts}
-            currencyCode={
-              wallets && wallets.length
-                ? wallets[activeWalletIndex].currency.currency.code
-                : ''
-            }
-            // showDialog={this.showDialog}
-            // logout={this.logout}
-          />
+          <View style={{ flex: 1 }}>
+            <Text style={styles.sectionTitle}>Feed</Text>
+            <HomeCards navigation={this.props.navigation} />
+            {/*<TransactionList*/}
+              {/*// updateBalance={this.getBalanceInfo}*/}
+              {/*// fetchAccounts={fetchAccounts}*/}
+              {/*currencyCode={*/}
+                {/*wallets && wallets.length*/}
+                  {/*? wallets[activeWalletIndex].currency.currency.code*/}
+                  {/*: ''*/}
+              {/*}*/}
+              {/*// showDialog={this.showDialog}*/}
+              {/*// logout={this.logout}*/}
+            {/*/>*/}
+          </View>
         </Swiper>
         {/* <TransactionPopUp
           popupDialog={popupDialog => {
@@ -98,6 +101,12 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
+  },
+  sectionTitle: {
+    fontSize: 14,
+    padding: 16,
+    paddingBottom: 0,
+    color: Colors.titleColor
   },
 };
 
