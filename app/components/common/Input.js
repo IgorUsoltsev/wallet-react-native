@@ -224,7 +224,7 @@ class Input extends Component {
               // }
               keyboardShouldPersistTaps="handled"
               style={{
-                backgroundColor: colors.primaryContrast,
+                backgroundColor: colors.primary,
                 maxHeight: 150,
                 borderBottomLeftRadius: 5,
                 borderBottomRightRadius: 5,
