@@ -6,6 +6,7 @@ import { ScrollView, Text, View } from 'react-native';
 
 import DrawerHeader from './../components/drawerHeader';
 import DrawerOption from './DrawerOption';
+import { Constants } from 'expo';
 
 class CustomDrawer extends Component {
   render() {
@@ -14,7 +15,7 @@ class CustomDrawer extends Component {
 
     return (
       <View
-        style={[styles.container, { backgroundColor: colors.primary }]}>
+        style={[ styles.container, {paddingTop: Constants.statusBarHeight,backgroundColor: colors.primary } ]}>
         <View>
           <DrawerHeader navigation={navigation} colors={colors} />
         </View>
