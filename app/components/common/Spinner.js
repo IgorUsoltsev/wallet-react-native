@@ -1,12 +1,22 @@
 // import lib for making component
 import React from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, Image } from 'react-native';
 
 // make component
-const Spinner = ({ size }) => {
+const Spinner = ({ size, type }) => {
   return (
     <View style={styles.containerStyle}>
-      <ActivityIndicator size={size || 'large'} />
+      {type === 'rehive' ? (
+        <Image
+          style={{
+            height: size === 'large' ? 150 : 50,
+            width: size === 'large' ? 150 : 50,
+          }}
+          source={require('./../../../assets/icons/rehive_spinner_150.gif')}
+        />
+      ) : (
+        <ActivityIndicator size={size || 'large'} />
+      )}
     </View>
   );
 };

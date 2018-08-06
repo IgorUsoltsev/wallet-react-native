@@ -14,43 +14,8 @@ import { Button } from './Button';
 class MultiFactorAuthentication extends Component {
   state = { hasGAuth: false, hasAuthy: false };
 
-  // componentDidMount() {
-  //   const { type } = this.props;
-  //   let hasGAuth = false;
-  //   let hasAuthy = false;
-
-  //   if (type === 'token') {
-  //   } else if (pin) {
-  //     // contentText = 'Please input your pin to proceed';
-  //   } else {
-  //     // onSuccess();
-  //   }
-
-  //   this.setState({ hasGAuth, hasAuthy });
-  // }
-
-  checkDeviceForHardware = async () => {
-    let compatible = await Expo.Fingerprint.hasHardwareAsync();
-    this.setState({ compatible });
-  };
-
-  checkForFingerprints = async () => {
-    let fingerprints = await Expo.Fingerprint.isEnrolledAsync();
-    this.setState({ fingerprints });
-  };
-
-  scanFingerprint = async () => {
-    let result = await Expo.Fingerprint.authenticateAsync('Scan your finger.');
-    if (result.success) {
-      console.log('success');
-      this.props.onSuccess();
-    } else {
-      this.setState({ errorText: 'Unable to authenticate with fingerprint' });
-    }
-  };
-
   _onInputPinComplete(code) {
-    const { pin, fingerprint, modalVisible, onSuccess, onDismiss } = this.props;
+    const { pin, onSuccess } = this.props;
     let errorText = '';
     if (pin === code) {
       onSuccess();

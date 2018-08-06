@@ -3,6 +3,7 @@ import { Constants } from 'expo';
 import { View, Text, StyleSheet, NetInfo } from 'react-native';
 // import colors from './../config/colors';
 import { HeaderButton } from './common';
+import getVerifiedScreen from '../screens/settings/getVerified/getVerifiedScreen';
 
 export default class Header extends Component {
   constructor(props) {
@@ -63,8 +64,10 @@ export default class Header extends Component {
       headerRightIcon,
       colors,
       home,
-      inverted
+      inverted,
+      noShadow
     } = this.props;
+    console.log(noShadow);
 
     const bg = inverted ? colors.primary : colors.tertiary;
     const text = inverted ? colors.primaryContrast : colors.primary;
@@ -75,19 +78,19 @@ export default class Header extends Component {
         style={[
           {
             //elevation: 10,
-            //elevation: 4,
             zIndex: 11,
             paddingTop: Constants.statusBarHeight,
             backgroundColor: bg,
           },
-          !home
-            ? {
+          noShadow
+            ? null
+            : {
+                elevation: 10,
                 shadowColor: '#000',
                 shadowOffset: { width: 2, height: 2 },
                 shadowRadius: 5,
                 shadowOpacity: 0.3,
-              }
-            : null,
+              },
         ]}>
         {creditSwitch === false &&
           debitSwitch === true && (

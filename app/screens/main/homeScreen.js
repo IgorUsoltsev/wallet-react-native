@@ -56,6 +56,7 @@ class HomeScreen extends Component {
           right
           home
           inverted={true}
+          noShadow
           // noAccounts={this.state.noAccounts}
         />
         <HeaderWalletList

@@ -31,27 +31,32 @@ export const decodeQR = string => {
 
     let temp = string.split(':');
     type = temp[0];
+
     temp = temp[1].split('?');
     recipient = temp[0];
-    temp = temp[1].split('&');
-    for (i = 0; i < temp.length; i++) {
-      let detail = temp[i].split('=');
-      switch (detail[0]) {
-        case 'amount':
-          amount = detail[1];
-          break;
-        case 'note':
-          note = detail[1];
-          break;
-        case 'memo':
-          memo = detail[1];
-          break;
-        case 'account':
-          account = detail[1];
-          break;
-        case 'currency':
-          currency = detail[1];
-          break;
+    if (temp[1]) {
+      temp = temp[1].split('&');
+      console.log(temp);
+      for (i = 0; i < temp.length; i++) {
+        console.log('temp-i', temp[i]);
+        let detail = temp[i].split('=');
+        switch (detail[0]) {
+          case 'amount':
+            amount = detail[1];
+            break;
+          case 'note':
+            note = detail[1];
+            break;
+          case 'memo':
+            memo = detail[1];
+            break;
+          case 'account':
+            account = detail[1];
+            break;
+          case 'currency':
+            currency = detail[1];
+            break;
+        }
       }
     }
     return { type, recipient, amount, note, currency, account };

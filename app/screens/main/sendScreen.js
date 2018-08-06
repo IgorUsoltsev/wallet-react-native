@@ -280,6 +280,7 @@ class SendScreen extends Component {
       sendType,
     } = this.props;
     const { colors } = company_config;
+    console.log(sendType);
     switch (sendState) {
       case 'amount':
         return (

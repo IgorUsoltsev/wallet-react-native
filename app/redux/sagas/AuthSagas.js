@@ -45,6 +45,7 @@ import {
   VERIFY_MFA,
   AUTH_STORE_USER,
   POST_AUTH_FLOW_START,
+  RESET_AUTH,
   POST_AUTH_FLOW_FINISH,
 } from '../actions/AuthActions';
 import { Toast } from 'native-base';
@@ -94,7 +95,6 @@ function* init() {
           if (token) {
             yield call(Rehive.verifyToken, token);
             yield call(Rehive.initWithToken, token);
-            // yield call(Rehive.getProfile);
             if (company_config.pin.appLoad) {
               const { pin, fingerprint } = yield select(getAuth);
               if (pin || fingerprint) {
@@ -131,6 +131,10 @@ function* init() {
 /* sets initial auth state */
 function* initialAuthState(mainState, detailState) {
   try {
+    console.log(mainState, detailState);
+    if (mainState === 'landing') {
+      yield put({ type: RESET_AUTH });
+    }
     yield put({
       type: INIT.success,
       payload: { mainState, detailState },
@@ -181,7 +185,6 @@ function* authFlow() {
             yield put({ type: LOADING });
             yield call(Rehive.register, { company: tempCompany.toLowerCase() });
           } catch (error) {
-            console.log(error);
             if (error.data && error.data.company) {
               // This error is returned if no company by this ID exists in rehive
               authError = 'Please enter a valid company ID';
@@ -235,11 +238,8 @@ function* authFlow() {
                   data = { company, user, password };
                   try {
                     yield put({ type: LOADING });
-                    console.log('data', data);
                     const tempResp = yield call(Rehive.login, data);
-                    console.log('tempResp', tempResp);
                     ({ user, token } = tempResp);
-                    console.log(token);
                     yield call(Rehive.initWithToken, token); // initialises sdk with new token
                     yield put({
                       type: LOGIN_USER_ASYNC.success,
@@ -475,14 +475,12 @@ function* postAuthFlow() {
                 yield put({ type: POST_NOT_LOADING });
                 const action = yield take(NEXT_AUTH_FORM_STATE);
                 yield put({ type: POST_LOADING });
-                console.log('action', action.payload.nextFormState);
                 if (action.payload.nextFormState === 'skip') {
                   nextDetailState = 'email';
                   if (company_config.auth.email === 'optional') {
                     skip = true;
                   }
                 } else if (action.payload.nextFormState) {
-                  console.log('hi');
                   run = false;
                   break;
                 }
@@ -507,10 +505,7 @@ function* postAuthFlow() {
                 if (action.payload.nextFormState === 'skip') {
                   nextDetailState = 'first_name';
                 }
-                // else if (action.payload.nextFormState) {
-                //   run = false;
-                //   break;
-                // }
+                //TODO: Check here
                 let resp = yield call(Rehive.getProfile);
                 yield put({ type: AUTH_STORE_USER, payload: resp });
               } else {
@@ -662,6 +657,7 @@ function* postAuthFlow() {
 function* appLoad() {
   console.log('appLoad');
   try {
+    yield put({ type: POST_LOADING });
     let count = 11;
     const { services } = yield select(getCompanyConfig);
     if (services.rewards) {
@@ -685,7 +681,7 @@ function* appLoad() {
     }
 
     let actions = [
-      put({ type: POST_LOADING }),
+      // put({ type: POST_LOADING }),
       put({ type: FETCH_ACCOUNTS_ASYNC.pending }),
       put({ type: FETCH_DATA_ASYNC.pending, payload: 'profile' }),
       put({ type: FETCH_DATA_ASYNC.pending, payload: 'mobile' }),
@@ -889,7 +885,7 @@ function* verifyMFA() {
 }
 
 export const authSagas = all([
-  takeEvery(INIT.pending, init),
+  takeLatest(INIT.pending, init),
   takeLatest(INIT.success, authFlow),
   // takeLatest(INIT.success, authFlow),
   takeLatest(LOGOUT_USER_ASYNC.success, init),
@@ -899,5 +895,5 @@ export const authSagas = all([
   takeLatest(AUTH_COMPLETE, appLoad),
   takeEvery(CHANGE_PASSWORD_ASYNC.pending, changePassword),
   takeEvery(LOGOUT_USER_ASYNC.pending, logoutUser),
-  takeEvery(RESET_PASSWORD_ASYNC.pending, resetPassword),
+  takeLatest(RESET_PASSWORD_ASYNC.pending, resetPassword),
 ]);

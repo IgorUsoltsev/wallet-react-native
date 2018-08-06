@@ -119,6 +119,7 @@ const styles = {
   viewStyleHeader: {
     justifyContent: 'space-between',
     flexDirection: 'row',
+    minHeight: 64,
     zIndex: 0,
     alignItems: 'center',
   },

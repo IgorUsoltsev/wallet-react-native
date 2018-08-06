@@ -32,6 +32,17 @@ export const setActiveWalletIndex = index => {
 };
 
 export const SET_SEND_TYPE = 'set_send_type';
+export const setSendType = type => {
+  if (type) {
+    return {
+      type: SET_SEND_TYPE,
+      payload: type,
+    };
+  } else {
+    // Return fail?
+  }
+};
+
 export const SET_SEND_WALLET = 'set_send_wallet';
 export const setSendWallet = wallet => {
   if (wallet) {

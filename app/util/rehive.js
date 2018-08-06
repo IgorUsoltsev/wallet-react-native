@@ -225,7 +225,7 @@ export const callApi = (method, route, data) => {
     mode: 'cors',
     headers,
   };
-  console.log(data);
+  // console.log(data);
   if (data) {
     config['body'] = JSON.stringify(data);
   }

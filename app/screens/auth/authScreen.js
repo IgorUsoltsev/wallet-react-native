@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Expo from 'expo';
+import { Fingerprint, Constants } from 'expo';
 import {
   View,
   Image,
@@ -62,6 +62,7 @@ class AuthScreen extends Component {
       resetPassword,
       skip,
       company_config,
+      terms,
     } = this.props;
 
     const colors = company_config ? company_config.colors : Colors;
@@ -103,15 +104,20 @@ class AuthScreen extends Component {
         }
         break;
       case 'register':
-        if (detailState === 'password') {
+        if (
+          (detailState === 'password' &&
+            !company_config.auth.terms &&
+            company_config.auth.terms.length === 0) ||
+          (company_config.auth.terms &&
+            terms &&
+            terms.id &&
+            company_config.auth.terms.length - 1 === terms.id)
+        ) {
           textFooterRight = 'Register';
         }
         break;
       case 'pin':
         textFooterRight = '';
-        if (detailState !== ('pin' || 'fingerprint')) {
-          break;
-        }
       case 'mfa':
       case 'verification':
         iconHeaderLeft = '';
@@ -252,7 +258,7 @@ class AuthScreen extends Component {
         switch (detailState) {
           case 'pin':
             return (
-              <View style={viewStyleLanding}>
+              <View style={viewStyleInput}>
                 <Text style={[textStyle, { color: colors.primaryContrast }]}>
                   Please enter pin
                 </Text>
@@ -276,17 +282,28 @@ class AuthScreen extends Component {
               </View>
             );
           case 'fingerprint':
-            this._scanFingerprint();
+            // this._scanFingerprint();
             return (
               <View style={[viewStyleLanding,{alignItems: 'center'}]}>
+
                 <Icon
-                    name={'fingerprint'}
-                    size={48}
-                    color={colors.secondary}
+                  name={'fingerprint'}
+                  size={48}
+                  color={colors.secondary}
                 />
-                <Text style={[textStyle, { color: colors.primaryContrast }]}>
-                  Please scan fingerprint
-                </Text>
+                <View style={buttonsContainer}>
+                  <Button
+                    label="USE FINGERPRINT"
+                    textColor={colors.secondaryContrast}
+                    backgroundColor={colors.secondary}
+                    size="large"
+                    reference={input => {
+                      this.login = input;
+                    }}
+                    onPress={() => this._scanFingerprint()}
+                    animation="slideInRight"
+                  />
+                </View>
               </View>
             );
           case 'set_pin':
@@ -323,7 +340,7 @@ class AuthScreen extends Component {
               <View style={viewStyleLanding}>
                 <View style={buttonsContainer}>
                   <Button
-                    label="SCAN FINGERPRINT"
+                    label="USE FINGERPRINT"
                     textColor={colors.secondaryContrast}
                     backgroundColor={colors.secondary}
                     reference={input => {
@@ -362,9 +379,7 @@ class AuthScreen extends Component {
                 textColor={company_config.colors.secondaryContrast}
                 backgroundColor={company_config.colors.secondary}
                 size="large"
-                reference={input => {
-                  this.login = input;
-                }}
+                reference={input => { this.login = input; }}
                 onPress={() => nextAuthFormState('login')}
                 animation="fadeInUpBig"
               /> */}
@@ -373,9 +388,7 @@ class AuthScreen extends Component {
                   textColor={company_config.colors.primaryContrast}
                   backgroundColor="transparent"
                   // size="large"
-                  reference={input => {
-                    this.login = input;
-                  }}
+                  reference={input => { this.login = input; }}
                   onPress={() => nextAuthFormState('register')}
                   animation="fadeInUpBig"
                 /> */}
@@ -411,21 +424,30 @@ class AuthScreen extends Component {
   }
 
   _scanFingerprint = async () => {
-    let result = await Expo.Fingerprint.authenticateAsync('Scan your finger');
+    if (Platform.OS === 'android') {
+      this.props.showFingerprintModal();
+    }
+    let result = await Expo.Fingerprint.authenticateAsync('Biometric scan');
+    this.props.hideModal();
+
     if (result.success) {
       this.props.pinSuccess();
     } else {
-      this.props.pinFail('Unable to authenticate with fingerprint');
+      this.props.pinFail('Unable to authenticate with biometrics');
     }
   };
 
   _activateFingerprint = async () => {
-    if (Platform.OS !== 'ios') {
-      await Expo.Fingerprint.cancelAuthenticate();
+    if (Platform.OS === 'android') {
       this.props.showFingerprintModal();
     }
-    if (await Expo.Fingerprint.authenticateAsync()) {
+    let result = await Expo.Fingerprint.authenticateAsync('Biometric scan');
+    this.props.hideModal();
+
+    if (result.success) {
       this.props.activateFingerprint();
+    } else {
+      this.props.pinFail('Unable to authenticate with biometrics');
     }
   };
 
@@ -459,6 +481,7 @@ class AuthScreen extends Component {
     let returnKeyType = 'done';
     let onSubmitEditing = () => this.props.nextAuthFormState('');
     let keyboardType = 'default';
+    let autoCapitalize = 'none';
 
     switch (detailState) {
       case 'company':
@@ -482,10 +505,12 @@ class AuthScreen extends Component {
         placeholder = 'e.g. Password';
         break;
       case 'first_name':
+        autoCapitalize = 'words';
         value = first_name;
         placeholder = 'e.g. John';
         break;
       case 'last_name':
+        autoCapitalize = 'words';
         value = last_name;
         placeholder = 'e.g. Snow';
         break;
@@ -519,6 +544,7 @@ class AuthScreen extends Component {
         value={value}
         inputError={authError}
         // autoFocus
+        autoCapitalize={autoCapitalize}
         keyboardType={keyboardType}
         onChangeText={onChangeText}
         returnKeyType={returnKeyType}
@@ -556,11 +582,12 @@ class AuthScreen extends Component {
         break;
       case 'fingerprint':
         contentText = 'Please scan your fingerprint';
+        textActionOne = 'CANCEL';
         onPressActionOne = () => {
           if (Platform.os !== 'ios') {
-            Expo.Fingerprint.cancelAuthenticate();
+            Fingerprint.cancelAuthenticate();
           }
-          hideModal;
+          hideModal();
         };
         break;
     }
@@ -593,7 +620,7 @@ class AuthScreen extends Component {
       >
         {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}> */}
         {loading || postLoading || appLoading ? (
-          <Spinner size="large" />
+          <Spinner size="large" type="rehive" />
         ) : (
           this.renderMainContainer()
         )}
@@ -607,7 +634,7 @@ class AuthScreen extends Component {
 const styles = {
   viewStyleContainer: {
     flex: 1,
-    paddingTop: Expo.Constants.statusBarHeight,
+    paddingTop: Constants.statusBarHeight,
     justifyContent: 'center',
   },
   buttonsContainer: {
@@ -620,6 +647,12 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     // alignItems: 'center',
+  },
+  viewStylePin: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1,
+    flexDirection: 'column',
   },
   viewStyleInput: {
     width: '100%',

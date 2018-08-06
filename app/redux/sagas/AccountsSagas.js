@@ -108,6 +108,7 @@ function* checkSendServices(action) {
   try {
     let service = 'rehive';
     const services = yield select(getCrypto);
+    console.log('services', services);
     if (services.stellar.includes(action.payload.currency.currency.code)) {
       service = 'stellar';
     } else if (

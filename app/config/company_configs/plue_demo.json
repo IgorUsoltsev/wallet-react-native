@@ -19,13 +19,13 @@
         "id": 0,
         "title": "Privacy Policy",
         "description": "Click here to read more on the privacy policy",
-        "link": ""
+        "link": "https://www.google.co.za/"
       },
       {
         "id": 1,
         "title": "User Agreement",
         "description": "Click here to read more on the user agreement",
-        "link": ""
+        "link": "https://www.google.co.za/"
       }
     ],
     "first_name": true,

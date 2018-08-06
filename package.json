@@ -50,7 +50,7 @@
     "redux-persist": "^5.9.1",
     "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
-    "rehive": "^1.20.1",
+    "rehive": "^1.20.2",
     "wallet-address-validator": "^0.1.7"
   },
   "devDependencies": {

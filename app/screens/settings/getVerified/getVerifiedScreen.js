@@ -30,7 +30,7 @@ class GetVerifiedScreen extends Component {
     const { profile } = this.props;
 
     let value = profile.first_name + ' ' + profile.last_name;
-    let status = profile.status.toUpperCase();
+    let status = profile.status ? profile.status.toUpperCase() : 'INCOMPLETE';
 
     return (
       <GetVerifiedOption
@@ -124,7 +124,7 @@ class GetVerifiedScreen extends Component {
     if (!value) {
       value = 'Not yet provided';
     }
-    let status = address.status.toUpperCase();
+    let status = address.status ? address.status.toUpperCase() : 'INCOMPLETE';
 
     return (
       <GetVerifiedOption
@@ -149,13 +149,13 @@ class GetVerifiedScreen extends Component {
     let idPending = idDocuments.filter(doc => doc.status === 'pending');
     let idDenied = idDocuments.filter(doc => doc.status === 'denied');
     if (idVerified.length > 0) {
-      statusIdentity = 'verified';
+      statusIdentity = 'VERIFIED';
       valueIdentity = 'Verified';
     } else if (idPending.length > 0) {
-      statusIdentity = 'pending';
+      statusIdentity = 'PENDING';
       valueIdentity = 'Waiting for approval';
     } else if (idDenied.length) {
-      statusIdentity = 'denied';
+      statusIdentity = 'DENIED';
       valueIdentity = idDenied[0].note;
     }
 
@@ -163,7 +163,7 @@ class GetVerifiedScreen extends Component {
       <GetVerifiedOption
         label="Proof of Identity"
         value={valueIdentity}
-        status={statusIdentity.toUpperCase()}
+        status={statusIdentity}
         gotoAddress="Document"
         goTo={this.goTo}
       />
@@ -186,13 +186,13 @@ class GetVerifiedScreen extends Component {
     );
     let addressDenied = addressDocuments.filter(doc => doc.status === 'denied');
     if (addressVerified.length > 0) {
-      statusAddress = 'verified';
+      statusAddress = 'VERIFIED';
       valueAddress = 'Verified';
     } else if (addressPending.length > 0) {
-      statusAddress = 'pending';
+      statusAddress = 'PENDING';
       valueAddress = 'Waiting for approval';
     } else if (addressDenied.length > 0) {
-      statusAddress = 'denied';
+      statusAddress = 'DENIED';
       valueAddress = idDenied[0].note;
     }
 
@@ -200,7 +200,7 @@ class GetVerifiedScreen extends Component {
       <GetVerifiedOption
         label="Proof of Address"
         value={valueAddress}
-        status={statusAddress.toUpperCase()}
+        status={statusAddress}
         gotoAddress="Document"
         goTo={this.goTo}
       />
@@ -225,13 +225,13 @@ class GetVerifiedScreen extends Component {
       doc => doc.status === 'denied',
     );
     if (idSelfieVerified.length > 0) {
-      statusAdvancedIdentity = 'verified';
+      statusAdvancedIdentity = 'VERIFIED';
       valueAdvancedIdentity = 'Verified';
     } else if (idSelfiePending.length > 0) {
-      statusAdvancedIdentity = 'pending';
+      statusAdvancedIdentity = 'PENDING';
       valueAdvancedIdentity = 'Waiting for approval';
     } else if (idSelfieDenied.length > 0) {
-      statusAdvancedIdentity = 'denied';
+      statusAdvancedIdentity = 'DENIED';
       valueAdvancedIdentity = idSelfieDenied[0].note;
     }
 
@@ -239,7 +239,7 @@ class GetVerifiedScreen extends Component {
       <GetVerifiedOption
         label="Advanced Proof of Identity"
         value={valueAdvancedIdentity}
-        status={statusAdvancedIdentity.toUpperCase()}
+        status={statusAdvancedIdentity}
         gotoAddress="Document"
         goTo={this.goTo}
       />
@@ -266,6 +266,7 @@ class GetVerifiedScreen extends Component {
           drawer
           title="Get verified"
           colors={company_config.colors}
+          noShadow
         />
         <HeaderProfile
           photoLink={profile.profile}

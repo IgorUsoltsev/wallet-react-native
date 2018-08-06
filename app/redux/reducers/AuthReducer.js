@@ -93,6 +93,8 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         appLoading: false,
+        pin: '',
+        fingerprint: false,
       };
 
     case VERIFY_MFA:
@@ -209,6 +211,7 @@ export default (state = INITIAL_STATE, action) => {
         modalVisible: false,
         loading: false,
         appLoading: false,
+        skip: false,
       };
     case AUTH_COMPLETE:
       return {
@@ -325,6 +328,8 @@ export default (state = INITIAL_STATE, action) => {
         authError: '',
         mainState: 'landing',
         detailState: 'landing',
+        pin: '',
+        fingerprint: false,
         appLoading: false,
         company: state.company,
         company_config: state.company_config,

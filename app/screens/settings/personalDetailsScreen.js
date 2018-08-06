@@ -102,6 +102,7 @@ class PersonalDetailsScreen extends Component {
             showDetail ? updateItem('profile', tempItem) : this.toggleEdit()
           }
           colors={company_config.colors}
+          noShadow
         />
         <HeaderProfile
           photoLink={profile.profile}

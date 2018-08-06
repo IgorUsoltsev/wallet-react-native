@@ -218,11 +218,13 @@ export default (state = INITIAL_STATE, action) => {
 
     case SET_ACTIVE_CURRENCY_ASYNC.pending:
       return {
+        ...state,
         loading: true,
       };
     case SET_ACTIVE_CURRENCY_ASYNC.success:
     case SET_ACTIVE_CURRENCY_ASYNC.fail:
       return {
+        ...state,
         loading: false,
       };
 

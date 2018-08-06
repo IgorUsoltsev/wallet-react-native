@@ -17,10 +17,11 @@ class Checkbox extends Component {
     } = this.props;
     const {
       textStyle,
+      textStyleRequired,
       viewStyleContainer,
       viewStyleContainerCheckbox,
       textStyleLink,
-      textStyleRequired,
+      viewStyleTextLink,
       viewStyleText,
       viewStyleCheckbox,
     } = styles;
@@ -42,7 +43,9 @@ class Checkbox extends Component {
           <View style={viewStyleText}>
             <Text style={textStyle}>{title}</Text>
             <TouchableOpacity onPress={() => WebBrowser.openBrowserAsync(link)}>
-              <Text style={textStyleLink}>{description}</Text>
+              <View style={viewStyleTextLink}>
+                <Text style={textStyleLink}>{description}</Text>
+              </View>
             </TouchableOpacity>
           </View>
         </View>
@@ -58,43 +61,50 @@ class Checkbox extends Component {
 
 const styles = {
   viewStyleContainer: {
-    alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    minHeight: 72,
+    // alignItems: 'flex-start',
+    // justifyContent: 'flex-start',
+    // minHeight: 72,
     margin: 8,
     padding: 8,
     borderRadius: 5,
     // overflow: 'hidden',
   },
   viewStyleContainerCheckbox: {
-    flex: 1,
+    // flex: 1,
     flexDirection: 'row',
-    minHeight: 72,
+    // minHeight: 72,
   },
   viewStyleCheckbox: {
     margin: 4,
-    marginVertical: 12,
+    justifyContent: 'center',
+    // marginVertical: 12,
   },
   viewStyleText: {
-    flexDirection: 'column',
+    // flexDirection: 'column',
     paddingLeft: 8,
     paddingRight: 16,
+  },
+  viewStyleTextLink: {
+    // flexDirection: 'column',
     flexWrap: 'wrap',
+    marginRight: 16,
   },
   textStyle: {
     color: 'black',
     fontSize: 16,
-    paddingBottom: 2,
+    // paddingBottom: 2,
   },
   textStyleLink: {
     color: Colors.primaryContrast,
     fontSize: 12,
     // flex: 1,
-    marginRight: 16,
+    marginRight: 8,
   },
   textStyleRequired: {
     color: 'red',
-    paddingRight: 5,
+    padding: 8,
+    paddingTop: 4,
+    // paddingRight: 5,
     // minHeight: 72,
   },
 };
