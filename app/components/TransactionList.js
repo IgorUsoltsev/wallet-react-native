@@ -230,11 +230,11 @@ class TransactionList extends Component {
 const styles = {
   containerStyle: {
     flex: 1,
-    paddingHorizontal: 8,
     zIndex: 2,
+    alignSelf: 'stretch'
   },
   textStyleHeader: {
-    fontSize: 20,
+    fontSize: 14,
     textAlign: 'center',
     paddingVertical: 8,
     fontWeight: 'bold',

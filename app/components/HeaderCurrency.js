@@ -25,7 +25,7 @@ class HeaderCurrency extends Component {
     // console.log('length', length);
     // console.log('divisibility', currency.currency.divisibility);
     let fontSize = Math.min(Math.floor(SCREEN_WIDTH / (0.8 * length)), 42);
-    return [styles.textStyleAmount, { fontSize, color: colors.focus }];
+    return [styles.textStyleAmount, { fontSize, color: colors.primary }];
   }
 
   render() {
@@ -51,11 +51,10 @@ class HeaderCurrency extends Component {
           viewStyleContainer,
           detail
             ? {
-                paddingTop: 12,
-                width: SCREEN_WIDTH - 16,
+                paddingTop: 10,
               }
             : { width: SCREEN_WIDTH },
-          { backgroundColor: colors.primary },
+          { backgroundColor: colors.tertiary },
         ]}>
         {showClose ? (
           <View style={iconStyleTitleRight}>
@@ -66,11 +65,11 @@ class HeaderCurrency extends Component {
             />
           </View>
         ) : null}
-        <Text style={[textStyleCode, { color: colors.primaryContrast }]}>
+        <Text style={[textStyleCode, { color: colors.primary }]}>
           {currency.currency.code}
         </Text>
         {showAccountLabel ? (
-          <Text style={[textStyleAccount, { color: colors.primaryContrast }]}>
+          <Text style={[textStyleAccount, { color: colors.primary }]}>
             {account_name}
           </Text>
         ) : null}
@@ -106,10 +105,10 @@ class HeaderCurrency extends Component {
 const styles = {
   viewStyleContainer: {
     // flex: 1,
-    backgroundColor: Colors.primary,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingBottom: 16,
   },
   viewStyleCurrency: {
     flexDirection: 'row',
@@ -117,19 +116,17 @@ const styles = {
     alignItems: 'center',
   },
   textStyleCode: {
-    color: Colors.primaryContrast,
-    fontSize: 20,
-    fontWeight: 'bold',
-    paddingBottom: 0,
+    fontSize: 16,
+    paddingBottom: 5,
   },
   textStyleAccount: {
-    color: Colors.primaryContrast,
     fontSize: 16,
     // fontWeight: 'bold',
     paddingBottom: 8,
   },
   textStyleAmount: {
-    fontSize: 42,
+    fontSize: 32,
+    lineHeight: 42,
     // paddingHorizontal: 2,
     // flexWrap: 'no-wrap',
     fontWeight: 'bold',

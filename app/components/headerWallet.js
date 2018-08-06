@@ -105,83 +105,14 @@ class HeaderWallet extends Component {
     itemVisiblePercentThreshold: 50,
   };
 
-  renderButtons() {
-    const { viewStyleButtons } = styles;
-    return (
-      <View>
-        <FlatList
-          contentContainerStyle={viewStyleButtons}
-          data={this.props.buttons}
-          horizontal
-          scrollEnabled={false}
-          renderItem={({ item }) => (
-            <WalletAction
-              type={item.type}
-              onPress={() => this.onButtonPress(item.type)}
-              color={this.props.colors.primaryContrast}
-            />
-          )}
-          keyExtractor={item => item.id.toString()}
-          showsHorizontalScrollIndicator={false}
-        />
-      </View>
-    );
-  }
-
-  onButtonPress(type) {
-    const {
-      wallets,
-      activeWalletIndex,
-      setWithdrawWallet,
-      resetSend,
-      setSendWallet,
-      navigation,
-      resetWithdraw,
-    } = this.props;
-    switch (type) {
-      case 'send': {
-        resetSend();
-        setSendWallet(
-          wallets.length > 1 ? wallets[activeWalletIndex] : wallets[0],
-        );
-        navigation.navigate('Send');
-        break;
-      }
-      case 'receive': {
-        navigation.navigate('Receive');
-        break;
-      }
-      case 'withdraw': {
-        resetWithdraw();
-        setWithdrawWallet(
-          wallets.length > 1 ? wallets[activeWalletIndex] : wallets[0],
-        );
-        navigation.navigate('Withdraw');
-        break;
-      }
-      case 'deposit': {
-        navigation.navigate('Deposit');
-        break;
-      }
-      case 'more':
-        navigation.navigate('Wallets', {
-          wallet: wallets[activeWalletIndex],
-        });
-        break;
-      default:
-        console.log('Error: unknown button type');
-    }
-  }
-
   render() {
     const { colors, wallets } = this.props;
     const { viewStyleContainer, viewStyleBox, textStyle } = styles;
     return (
-      <View style={[viewStyleContainer, { backgroundColor: colors.primary }]}>
+      <View style={[viewStyleContainer]}>
         {wallets && wallets.length > 0 ? (
-          <View>
+          <View style={{flex:1}}>
             {this.renderWallets()}
-            {this.renderButtons()}
           </View>
         ) : (
           <View style={viewStyleBox}>
@@ -198,12 +129,12 @@ class HeaderWallet extends Component {
 const styles = {
   viewStyleContainer: {
     flexDirection: 'column',
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
-    zIndex: 10,
+    // elevation: 4,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 2, height: 2 },
+    // shadowRadius: 5,
+    // shadowOpacity: 0.3,
+    // zIndex: 10,
   },
   viewStyleButtons: {
     flexDirection: 'row',
@@ -220,6 +151,9 @@ const styles = {
     fontSize: 18,
     fontWeight: 'normal',
   },
+  viewButtonsContainer: {
+    alignSelf: 'flex-end'
+  }
 };
 
 const mapStateToProps = ({ accounts }) => {

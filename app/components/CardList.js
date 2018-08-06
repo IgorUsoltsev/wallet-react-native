@@ -357,32 +357,33 @@ class CardList extends Component {
           <ScrollView
             keyboardDismissMode={'interactive'}
             keyboardShouldPersistTaps="always">
-            <Card
-              colors={colors}
-              key={type}
-              type={type}
-              renderHeader={renderHeader}
-              title={wallet ? '' : title ? title(tempItem) : ''}
-              colorTitleBackground="white"
-              subtitle={wallet ? '' : subtitle ? subtitle(tempItem) : ''}
-              textActionOne={wallet ? '' : showReward ? textActionOne : 'SAVE'}
-              onPressActionOne={() =>
-                showReward
-                  ? onPressActionOne(tempItem)
-                  : updateItem(type, tempItem)
-              }
-              textActionTwo={wallet ? '' : 'CANCEL'}
-              onPressActionTwo={() =>
-                showReward ? onPressActionTwo() : fetchData(type)
-              }
-              loading={loadingDetail}>
-              {renderDetail
+            {renderDetail
                 ? renderDetail(
                     tempItem ? tempItem : null,
                     navigation ? navigation : null,
-                  )
-                : null}
-            </Card>
+                )
+                : (
+                    <Card
+                        colors={colors}
+                        key={type}
+                        type={type}
+                        renderHeader={renderHeader}
+                        title={wallet ? '' : title ? title(tempItem) : ''}
+                        colorTitleBackground="white"
+                        subtitle={wallet ? '' : subtitle ? subtitle(tempItem) : ''}
+                        textActionOne={wallet ? '' : showReward ? textActionOne : 'SAVE'}
+                        onPressActionOne={() =>
+                            showReward
+                                ? onPressActionOne(tempItem)
+                                : updateItem(type, tempItem)
+                        }
+                        textActionTwo={wallet ? '' : 'CANCEL'}
+                        onPressActionTwo={() =>
+                            showReward ? onPressActionTwo() : fetchData(type)
+                        }
+                        loading={loadingDetail}>
+                    </Card>
+                )}
           </ScrollView>
         ) : (
           <FlatList

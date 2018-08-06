@@ -36,7 +36,7 @@ class WalletAction extends Component {
     }
     return (
       <View style={viewStyleContainer}>
-        <CustomIcon name={type} size={48} color={color} />
+        <CustomIcon name={type} size={24} color={color} />
         <Text style={[textStyleLabel, { color }]}>{label}</Text>
       </View>
     );
@@ -60,20 +60,19 @@ const styles = {
   viewStyleContainer: {
     paddingBottom: 8,
     paddingTop: 8,
-    paddingVertical: 16,
     flexDirection: 'column',
     // marginRight: 8,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
   iconStyle: {
-    height: 48,
-    width: 48,
-    marginBottom: 4,
+    height: 24,
+    width: 24,
+    marginBottom: 2,
   },
   textStyleLabel: {
     color: Colors.primaryContrast,
-    fontSize: 14,
+    fontSize: 12,
     // fontWeight: 'bold',
     // paddingTop: 2,
   },

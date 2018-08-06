@@ -13,13 +13,8 @@ import {
   showModal
 } from './../redux/actions';
 
-import WalletAction from './WalletAction';
-import HeaderCurrency from './HeaderCurrency';
-import { EmptyListMessage } from './common';
 import {performDivisibility, standardizeString} from "../util/general";
 import CardList from "./CardList";
-import HeaderWallet from "./headerWallet";
-import TransactionList from "./TransactionList";
 import Colors from './../config/colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -70,35 +65,6 @@ class HeaderWalletList extends Component {
             <Text style={[styles.cardLabel, {color: '#FFFFFF'}]}>Available</Text>
             <Text style={[styles.cardValue, {color: '#FFFFFF'}]}>{available}</Text>
           </View>
-        </View>
-    );
-  }
-
-  renderDetail(item, navigation) {
-    // const { wallet } = this.state;
-    let i = 0;
-    let buttons = [];
-    if (this.props.company_bank_account.length > 0) {
-      buttons[i] = { id: i++, type: 'deposit' };
-    }
-    // buttons[i] = { id: i++, type: 'withdraw' };
-    buttons[i] = { id: i++, type: 'receive' };
-    buttons[i] = { id: i++, type: 'send' };
-    return (
-        <View style={styles.viewStyleDetailCard}>
-          <HeaderWallet
-              wallets={[item]}
-              buttons={buttons}
-              navigation={navigation}
-              showClose
-              colors={this.props.colors}
-          />
-          <TransactionList
-              // updateBalance={this.getBalanceInfo}
-              currencyCode={item.currency.currency.code}
-              // showDialog={this.showDialog}
-              // logout={this.logout}
-          />
         </View>
     );
   }

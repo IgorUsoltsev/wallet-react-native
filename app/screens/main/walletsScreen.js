@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View,Text } from 'react-native';
+import {View, Text, FlatList, Dimensions} from 'react-native';
 import { connect } from 'react-redux';
 import {
   fetchAccounts,
@@ -16,8 +16,10 @@ import Header from './../../components/header';
 import { Output, PopUpGeneral } from '../../components/common';
 import { standardizeString, performDivisibility } from './../../util/general';
 import HeaderWallet from '../../components/headerWallet';
+import WalletButtons from '../../components/walletButtons';
 import TransactionList from './../../components/TransactionList';
 import CardList from './../../components/CardList';
+import WalletAction from "../../components/WalletAction";
 
 class WalletsScreen extends Component {
   static navigationOptions = {
@@ -90,7 +92,7 @@ class WalletsScreen extends Component {
 
     //@todo: replace color '#FFFFFF' with dynamic company color
     return (
-      <View style={styles.viewStyleContainer}>
+      <View>
         <View style={styles.cardLabelWrapper}>
           <Text style={[styles.cardLabel, {color: '#FFFFFF'}]}>Balance</Text>
           <Text style={[styles.cardValue, {color: '#FFFFFF'}]}>{balance}</Text>
@@ -113,8 +115,9 @@ class WalletsScreen extends Component {
     // buttons[i] = { id: i++, type: 'withdraw' };
     buttons[i] = { id: i++, type: 'receive' };
     buttons[i] = { id: i++, type: 'send' };
+    //@todo: fix buttons stack to bottom
     return (
-      <View style={styles.viewStyleDetailCard}>
+      <View style={[styles.viewStyleDetailHeader, {flex:1,backgroundColor: this.props.company_config.colors.primary}]}>
         <HeaderWallet
           wallets={[item]}
           buttons={buttons}
@@ -127,6 +130,13 @@ class WalletsScreen extends Component {
           currencyCode={item.currency.currency.code}
           // showDialog={this.showDialog}
           // logout={this.logout}
+        />
+        <WalletButtons
+            wallets={[item]}
+            buttons={buttons}
+            navigation={navigation}
+            showClose
+            colors={this.props.company_config.colors}
         />
       </View>
     );
@@ -193,6 +203,11 @@ class WalletsScreen extends Component {
 }
 
 const styles = {
+  viewStyleDetailHeader: {
+    flex: 1,
+    flexGrow: 1,
+    alignSelf: 'stretch'
+  },
   viewStyleDetailCard: {
     flex: 1,
     backgroundColor: '#ffffff',
@@ -211,6 +226,7 @@ const styles = {
   container: {
     flex: 1,
     flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   cardLabelWrapper: {
     flex: 1,
