@@ -85,7 +85,9 @@
 
     "drawerColor": "#4FCBFF",
 
-    "lightGray": "#DFDFDF"
+    "lightGray": "#DFDFDF",
+
+    "titleColor": "#828A93"
   },
   "colors_inverted": {
     "primary": "#051627",

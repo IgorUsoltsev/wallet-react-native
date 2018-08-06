@@ -75,7 +75,7 @@ export default class Header extends Component {
         style={[
           {
             //elevation: 10,
-            elevation: 4,
+            //elevation: 4,
             zIndex: 11,
             paddingTop: Constants.statusBarHeight,
             backgroundColor: bg,

@@ -11,6 +11,8 @@ export default {
   //tertiaryContrast: "#828A93",
   focusContrast: "#000000",
 
+  titleColor: "#828A93",
+
   warning: "#FC8755",
   error: "#f44336",
   success: "#4CAF50",

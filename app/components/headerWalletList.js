@@ -20,6 +20,7 @@ import {performDivisibility, standardizeString} from "../util/general";
 import CardList from "./CardList";
 import HeaderWallet from "./headerWallet";
 import TransactionList from "./TransactionList";
+import Colors from './../config/colors';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -31,6 +32,10 @@ class HeaderWalletList extends Component {
     offset: SCREEN_WIDTH * index,
     index,
   });
+
+  componentDidMount() {
+    this.props.hideWallet();
+  }
 
   send = item => {
     this.props.resetSend();
@@ -110,61 +115,61 @@ class HeaderWalletList extends Component {
       loading_accounts
     } = this.props;
     return (
-        <CardList
-            colors={colors}
-            type="wallet"
-            navigation={this.props.navigation}
-            data={wallets}
-            tempItem={tempWallet}
-            loadingData={loading_accounts}
-            identifier="reference"
-            onRefresh={fetchAccounts}
-            activeItem={
-              item => viewWallet(item)
-            }
-            showDetail={false}
-            renderContent={this.renderContent}
-            renderDetail={(item, navigation) =>
-                this.renderDetail(item, navigation)
-            }
-            itemActive={item => (item ? item.currency.active : false)}
-            textTitleLeft={item => (item ? item.currency.currency.code : '')}
-            // onPressTitleLeft={item => this.showModal(item)}
-            title={item => (item ? item.currency.currency.description : '')}
-            subtitle={item => (item ? standardizeString(item.account_name) : '')}
-            onPressTitle={
-              item => viewWallet(item)
-              // this.props.navigation.navigate('Wallets', {
-              //   wallet: wallets[activeWalletIndex],
-              // })
-            }
-            onPressContent={
-              item => viewWallet(item)
-              // this.props.navigation.navigate('Wallets', {
-              //   wallet: wallets[activeWalletIndex],
-              // })
-            }
-            emptyListMessage="No wallets added yet"
-            titleStyle="secondary"
-            keyExtractor={item => item.index.toString()}
-            textActionOne={false}
-            textActionTwo={false}
-            canActive
-        />
+        <View style={styles.container}>
+          <Text style={styles.sectionTitle}>Wallets</Text>
+          <CardList
+              colors={colors}
+              type="wallet"
+              navigation={this.props.navigation}
+              data={wallets}
+              tempItem={tempWallet}
+              loadingData={loading_accounts}
+              identifier="reference"
+              onRefresh={fetchAccounts}
+              activeItem={
+                () => {}
+              }
+              showDetail={false}
+              renderContent={this.renderContent}
+              renderDetail={this.renderContent}
+              itemActive={item => (item ? item.currency.active : false)}
+              textTitleLeft={item => (item ? item.currency.currency.code : '')}
+              // onPressTitleLeft={item => this.showModal(item)}
+              title={item => (item ? item.currency.currency.description : '')}
+              subtitle={item => (item ? standardizeString(item.account_name) : '')}
+              onPressTitle={
+                (item, index) => {
+                  this.props.navigation.navigate('Wallets', {
+                    wallet: wallets[index],
+                  })
+                }
+              }
+              onPressContent={
+                (item, index) => {
+                  this.props.navigation.navigate('Wallets', {
+                    wallet: wallets[index],
+                  })
+                }
+              }
+              emptyListMessage="No wallets added yet"
+              titleStyle="secondary"
+              keyExtractor={item => item.index.toString()}
+              textActionOne={false}
+              textActionTwo={false}
+              canActive
+          />
+        </View>
     );
   }
 
   render() {
     const { colors, wallets } = this.props;
     const { viewStyleContainer, viewStyleBox, textStyle, container } = styles;
-    //@todo - fix fixed height 250px- how to make it dynamic?
     return (
-      <View style={[viewStyleContainer, { backgroundColor: colors.primary,height: 250 }]}>
-        {wallets && wallets.length > 0 ? (
-              <View style={container}>
-                {this.renderWallets()}
-              </View>
-            ) : (
+      <View style={[viewStyleContainer, { backgroundColor: colors.primary }]}>
+        {wallets && wallets.length > 0 ?
+            this.renderWallets()
+            : (
           <View style={viewStyleBox}>
             <Text style={[textStyle, { color: colors.primaryContrast }]}>
               No company currencies available
@@ -178,13 +183,14 @@ class HeaderWalletList extends Component {
 
 const styles = {
   viewStyleContainer: {
+    flex: 1,
     flexDirection: 'column',
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 2 },
-    shadowRadius: 5,
-    shadowOpacity: 0.3,
-    zIndex: 10,
+    // elevation: 4,
+    // shadowColor: '#000',
+    // shadowOffset: { width: 2, height: 2 },
+    // shadowRadius: 5,
+    // shadowOpacity: 0.3,
+    // zIndex: 10,
   },
   viewStyleButtons: {
     flexDirection: 'row',
@@ -215,6 +221,13 @@ const styles = {
       height: 1,
       width: 2,
     },
+  },
+  sectionTitle: {
+    fontSize: 14,
+    padding: 16,
+    paddingBottom: 0,
+    color: Colors.titleColor
+
   },
   container: {
     flex: 1,

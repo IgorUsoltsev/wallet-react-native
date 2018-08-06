@@ -37,7 +37,7 @@ class CardList extends Component {
     }
   }
 
-  renderItem = item => {
+  renderItem = (item, index) => {
     const {
       type,
       headerComponent,
@@ -82,10 +82,10 @@ class CardList extends Component {
               onPressHeader={onPressHeader}
               textTitleLeft={textTitleLeft ? textTitleLeft(item) : ''}
               iconTitleLeft={iconTitleLeft}
-              itemActive={itemActive ? itemActive(item) : false}
+              itemActive={itemActive ? itemActive(item,index) : false}
               onPressTitleLeft={() =>
                   onPressTitleLeft
-                      ? onPressTitleLeft(item)
+                      ? onPressTitleLeft(item,index)
                       : canActive ? activeItem(item) : null
               }
               title={title ? title(item) : ''}
@@ -93,12 +93,12 @@ class CardList extends Component {
               colorTitleBackground="#4FCBFF"
               onPressTitle={() =>
                   onPressTitle
-                      ? onPressTitle(item)
+                      ? onPressTitle(item,index)
                       : canEdit ? editItem(type, item) : null
               }
               onPressContent={() =>
                   onPressContent
-                      ? onPressContent(item)
+                      ? onPressContent(item,index)
                       : canEdit ? editItem(type, item) : null
               }
               iconFooter={
