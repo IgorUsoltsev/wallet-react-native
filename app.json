@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "PXPay",
-    "description": "A multi-currency wallet built on the Rehive platform.",
+    "name": "Personal Wallet",
+    "description": "",
     "version": "0.6.0",
     "slug": "pxpay",
     "privacy": "public",
