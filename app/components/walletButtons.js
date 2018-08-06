@@ -111,7 +111,6 @@ class walletButtons extends Component {
 
 const styles = {
   viewStyleContainer: {
-    alignSelf: 'flex-end',
     flexDirection: 'column',
     // elevation: 4,
     // shadowColor: '#000',

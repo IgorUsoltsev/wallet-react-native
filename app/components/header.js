@@ -67,7 +67,6 @@ export default class Header extends Component {
       inverted,
       noShadow
     } = this.props;
-    console.log(noShadow);
 
     const bg = inverted ? colors.primary : colors.tertiary;
     const text = inverted ? colors.primaryContrast : colors.primary;
@@ -82,15 +81,15 @@ export default class Header extends Component {
             paddingTop: Constants.statusBarHeight,
             backgroundColor: bg,
           },
-          noShadow
-            ? null
-            : {
-                elevation: 10,
-                shadowColor: '#000',
-                shadowOffset: { width: 2, height: 2 },
-                shadowRadius: 5,
-                shadowOpacity: 0.3,
-              },
+          // noShadow
+          //   ? null
+          //   : {
+          //       elevation: 10,
+          //       shadowColor: '#000',
+          //       shadowOffset: { width: 2, height: 2 },
+          //       shadowRadius: 5,
+          //       shadowOpacity: 0.3,
+          //     },
         ]}>
         {creditSwitch === false &&
           debitSwitch === true && (

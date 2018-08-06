@@ -349,12 +349,13 @@ class CardList extends Component {
       <KeyboardAvoidingView
         style={{
           flex: 1,
-          backgroundColor: '#FFFFFF',
+          backgroundColor: 'white',
         }}
         behavior={'padding'}
         enabled>
         {showDetail || showReward ? (
           <ScrollView
+            contentContainerStyle={{flexGrow:1}}
             keyboardDismissMode={'interactive'}
             keyboardShouldPersistTaps="always">
             {renderDetail

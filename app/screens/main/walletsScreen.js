@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, FlatList, Dimensions} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import { connect } from 'react-redux';
 import {
   fetchAccounts,
@@ -15,7 +15,7 @@ import Header from './../../components/header';
 // import Wallet from './../../components/wallet';
 import { Output, PopUpGeneral } from '../../components/common';
 import { standardizeString, performDivisibility } from './../../util/general';
-import HeaderWallet from '../../components/headerWallet';
+import HeaderWallet from '../../components/HeaderWallet';
 import WalletButtons from '../../components/walletButtons';
 import TransactionList from './../../components/TransactionList';
 import CardList from './../../components/CardList';
@@ -117,19 +117,19 @@ class WalletsScreen extends Component {
     buttons[i] = { id: i++, type: 'send' };
     //@todo: fix buttons stack to bottom
     return (
-      <View style={[styles.viewStyleDetailHeader, {flex:1,backgroundColor: this.props.company_config.colors.primary}]}>
+      <View style={[styles.viewStyleDetailHeader, {backgroundColor: this.props.company_config.colors.primary}]}>
         <HeaderWallet
-          wallets={[item]}
-          buttons={buttons}
-          navigation={navigation}
-          showClose
-          colors={this.props.company_config.colors}
+            wallets={[item]}
+            buttons={buttons}
+            navigation={navigation}
+            showClose
+            colors={this.props.company_config.colors}
         />
         <TransactionList
-          // updateBalance={this.getBalanceInfo}
-          currencyCode={item.currency.currency.code}
-          // showDialog={this.showDialog}
-          // logout={this.logout}
+            // updateBalance={this.getBalanceInfo}
+            currencyCode={item.currency.currency.code}
+            // showDialog={this.showDialog}
+            // logout={this.logout}
         />
         <WalletButtons
             wallets={[item]}
@@ -203,10 +203,16 @@ class WalletsScreen extends Component {
 }
 
 const styles = {
+  container: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
   viewStyleDetailHeader: {
     flex: 1,
     flexGrow: 1,
-    alignSelf: 'stretch'
+    alignSelf: 'stretch',
+    justifyContent: 'space-between',
   },
   viewStyleDetailCard: {
     flex: 1,
@@ -222,11 +228,6 @@ const styles = {
       height: 1,
       width: 2,
     },
-  },
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
   },
   cardLabelWrapper: {
     flex: 1,

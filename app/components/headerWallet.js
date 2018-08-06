@@ -69,32 +69,6 @@ class HeaderWallet extends Component {
     }
   }
 
-  renderItem(item, index) {
-    // let position = Animated.divide(this.scrollX, SCREEN_WIDTH);
-    // let i = index;
-    // // console.log(i);
-    // // console.log(position);
-    // let opacity = position.interpolate({
-    //   inputRange: [
-    //     SCREEN_WIDTH * (i - 1),
-    //     SCREEN_WIDTH * i,
-    //     SCREEN_WIDTH * (i + 1),
-    //   ],
-    //   outputRange: [0.5, 1, 0.5],
-    //   extrapolate: 'clamp',
-    // });
-    return (
-      <Animated.View
-        key={item.account_name + item.currency.currency.code}
-        // style={{ opacity }}
-      >
-        <HeaderCurrency wallet={item} />
-      </Animated.View>
-    );
-
-    return;
-  }
-
   handleViewableItemsChanged = info => {
     if (info.viewableItems && info.viewableItems.length > 0) {
       this.props.setActiveWalletIndex(info.viewableItems[0].index);
@@ -105,13 +79,36 @@ class HeaderWallet extends Component {
     itemVisiblePercentThreshold: 50,
   };
 
+  renderButtons() {
+    const { viewStyleButtons } = styles;
+    return (
+      <View>
+        <FlatList
+          contentContainerStyle={viewStyleButtons}
+          data={this.props.buttons}
+          horizontal
+          scrollEnabled={false}
+          renderItem={({ item }) => (
+            <WalletAction
+              type={item.type}
+              onPress={() => this.onButtonPress(item.type)}
+              color={this.props.colors.primaryContrast}
+            />
+          )}
+          keyExtractor={item => item.id.toString()}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+    );
+  }
+
   render() {
     const { colors, wallets } = this.props;
     const { viewStyleContainer, viewStyleBox, textStyle } = styles;
     return (
-      <View style={[viewStyleContainer]}>
+      <View style={[viewStyleContainer, { backgroundColor: colors.primary }]}>
         {wallets && wallets.length > 0 ? (
-          <View style={{flex:1}}>
+          <View>
             {this.renderWallets()}
           </View>
         ) : (
@@ -129,12 +126,6 @@ class HeaderWallet extends Component {
 const styles = {
   viewStyleContainer: {
     flexDirection: 'column',
-    // elevation: 4,
-    // shadowColor: '#000',
-    // shadowOffset: { width: 2, height: 2 },
-    // shadowRadius: 5,
-    // shadowOpacity: 0.3,
-    // zIndex: 10,
   },
   viewStyleButtons: {
     flexDirection: 'row',
@@ -151,9 +142,6 @@ const styles = {
     fontSize: 18,
     fontWeight: 'normal',
   },
-  viewButtonsContainer: {
-    alignSelf: 'flex-end'
-  }
 };
 
 const mapStateToProps = ({ accounts }) => {
