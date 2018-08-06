@@ -179,14 +179,14 @@ const styles = {
     // borderRadius: 2,
     // borderColor: '#ffffff',
     // borderWidth: 1,
-    shadowColor: 'rgba(0, 0, 0, 0.6)',
-    shadowOpacity: 0.2,
-    shadowRadius: 2,
-    elevation: 2,
-    shadowOffset: {
-      height: 1,
-      width: 2,
-    },
+    // shadowColor: 'rgba(0, 0, 0, 0.6)',
+    // shadowOpacity: 0.2,
+    // shadowRadius: 2,
+    // elevation: 2,
+    // shadowOffset: {
+    //   height: 1,
+    //   width: 2,
+    // },
   },
   sectionTitle: {
     fontSize: 14,
