@@ -485,7 +485,7 @@ class AuthScreen extends Component {
 
     switch (detailState) {
       case 'company':
-        placeholder = 'e.g. Rehive';
+        placeholder = 'e.g. PXPay';
         value = tempCompany;
         onChangeText = value =>
           this.props.authFieldChange({ prop: 'tempCompany', value });

@@ -79,7 +79,7 @@ class HomeCards extends Component {
             'Welcome to ' +
             (company_config.company && company_config.company.name
               ? company_config.company.name
-              : 'Rehive'),
+              : 'PXPay'),
           // description: 'A multi-currency wallet built on the Rehive platform.',
           image:
             company_config.company && company_config.company === 'pxpay_demo'

@@ -132,7 +132,7 @@ class ReceiveScreen extends Component {
           <Text style={styles.text}>
             {type === 'crypto'
               ? 'This QR code is your public address for accepting payments.'
-              : 'This QR code is your Rehive account for use with another Rehive app'}
+              : 'This QR code is your PXPay account for use with another PXPay app'}
           </Text>
 
           <TouchableHighlight
