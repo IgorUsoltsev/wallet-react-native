@@ -112,9 +112,9 @@ class WalletsScreen extends Component {
     if (this.props.company_bank_account.length > 0) {
       buttons[i] = { id: i++, type: 'deposit' };
     }
-    // buttons[i] = { id: i++, type: 'withdraw' };
     buttons[i] = { id: i++, type: 'receive' };
     buttons[i] = { id: i++, type: 'send' };
+    buttons[i] = { id: i++, type: 'withdraw' };
     //@todo: fix buttons stack to bottom
     return (
       <View style={[styles.viewStyleDetailHeader, {backgroundColor: this.props.company_config.colors.primary}]}>

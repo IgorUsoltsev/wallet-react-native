@@ -337,7 +337,7 @@ const styles = {
   viewStyleContainer: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: Colors.focus,
+    backgroundColor: Colors.primary,
     // paddingTop: 10,
   },
   viewStyleTopContainer: {

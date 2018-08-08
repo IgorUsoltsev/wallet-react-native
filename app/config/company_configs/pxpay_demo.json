@@ -40,7 +40,7 @@
     "appLoad": true,
     "security": false,
     "send": true,
-    "withdraw": false,
+    "withdraw": true,
     "updateDetails": false
   },
   "home": {

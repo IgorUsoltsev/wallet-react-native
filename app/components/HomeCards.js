@@ -15,6 +15,7 @@ import { standardizeString } from './../util/general';
 // import * as shape from 'd3-shape';
 
 import { CardContainer, Card, Button } from './common';
+import Colors from "../config/colors";
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
@@ -110,22 +111,32 @@ class HomeCards extends Component {
         }
       }
     }
-
-    return (
-      <FlatList
-        // refreshControl={
-        //   <RefreshControl
-        //     refreshing={loadingData}
-        //     onRefresh={() => fetchData(type)}
-        //   />
-        // }
-        keyboardShouldPersistTaps="always"
-        data={cards}
-        renderItem={({ item }) => this.renderCard(item)}
-        keyExtractor={item => (item.id ? item.id.toString() : null)}
-        ListFooterComponent={this.renderFooter()}
-      />
-    );
+    if(cards.length){
+      return (
+          <View style={{flex:1}}>
+            <Text style={styles.sectionTitle}>Feed</Text>
+            <CardContainer>
+              <FlatList
+                  // refreshControl={
+                  //   <RefreshControl
+                  //     refreshing={loadingData}
+                  //     onRefresh={() => fetchData(type)}
+                  //   />
+                  // }
+                  keyboardShouldPersistTaps="always"
+                  data={cards}
+                  renderItem={({ item }) => this.renderCard(item)}
+                  keyExtractor={item => (item.id ? item.id.toString() : null)}
+                  ListFooterComponent={this.renderFooter()}
+              />
+            </CardContainer>
+          </View>
+      );
+    }else{
+      return (
+          <View/>
+      );
+    }
   }
 
   renderCard(item) {
@@ -178,7 +189,7 @@ class HomeCards extends Component {
   }
 
   render() {
-    return <CardContainer>{this.renderCards()}</CardContainer>;
+    return this.renderCards();
   }
 }
 
@@ -201,6 +212,12 @@ const styles = {
     height: 80,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  sectionTitle: {
+    fontSize: 14,
+    padding: 16,
+    paddingBottom: 0,
+    color: Colors.titleColor
   },
 };
 

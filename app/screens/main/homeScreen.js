@@ -71,7 +71,6 @@ class HomeScreen extends Component {
         {/* {this.renderAccounts()} */}
         <Swiper renderPagination={renderPagination} loop={false}>
           <View style={{ flex: 1 }}>
-            <Text style={styles.sectionTitle}>Feed</Text>
             <HomeCards navigation={this.props.navigation} />
             {/*<TransactionList*/}
               {/*// updateBalance={this.getBalanceInfo}*/}
@@ -102,12 +101,6 @@ const styles = {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: 'white',
-  },
-  sectionTitle: {
-    fontSize: 14,
-    padding: 16,
-    paddingBottom: 0,
-    color: Colors.titleColor
   },
 };
 
