@@ -148,20 +148,7 @@ export const createDebit = (amount, currency, reference, note, metadata) =>
     note,
   });
 
-export const createTransfer = (
-  amount,
-  recipient,
-  note,
-  currency,
-  debit_account,
-) =>
-  r.transactions.createTransfer({
-    amount: parseInt(amount, 0),
-    recipient,
-    note,
-    currency,
-    debit_account,
-  });
+export const createTransfer = data => r.transactions.createTransfer(data);
 
 /* ACCOUNTS */
 export const getAccounts = () => r.accounts.get();

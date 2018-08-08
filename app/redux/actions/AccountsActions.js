@@ -140,6 +140,7 @@ export const send = sendData => async dispatch => {
   };
   dispatch({ type: SEND_ASYNC.pending });
   let response = '';
+  console.log('data', data);
   try {
     switch (sendData.type) {
       case 'rehive':
@@ -159,9 +160,10 @@ export const send = sendData => async dispatch => {
       type: SEND_ASYNC.success,
     });
   } catch (error) {
+    console.log(error);
     dispatch({
       type: SEND_ASYNC.error,
-      payload: error,
+      payload: error.message,
     });
   }
 };
@@ -243,7 +245,7 @@ export const withdraw = data => async dispatch => {
     console.log(error);
     dispatch({
       type: WITHDRAW_ASYNC.error,
-      payload: error,
+      payload: error.message,
     });
   }
 };

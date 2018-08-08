@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, FlatList, Text, RefreshControl } from 'react-native';
 import { WebBrowser } from 'expo';
+import { connect } from 'react-redux';
+import { fetchAccounts } from './../redux/actions';
 
 import * as Rehive from './../util/rehive';
 
@@ -43,6 +45,7 @@ class TransactionList extends Component {
     //   this.props.fetchAccounts();
     // }
     let response = await Rehive.getTransactions(currencyCode);
+    this.props.fetchAccounts();
     this.setState({
       previousCurrencyCode: currencyCode,
       transactions: response.results,
@@ -255,4 +258,11 @@ const styles = {
   },
 };
 
-export default TransactionList;
+const mapStateToProps = ({ accounts }) => {
+  const { wallets } = accounts;
+  return { wallets };
+};
+
+export default connect(mapStateToProps, {
+  fetchAccounts,
+})(TransactionList);

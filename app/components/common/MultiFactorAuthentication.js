@@ -10,6 +10,7 @@ import { maybeOpenURL } from 'react-native-app-link';
 
 import { CodeInput } from './CodeInput';
 import { Button } from './Button';
+import { Screen, Paragraph, Typography } from './styles';
 
 class MultiFactorAuthentication extends Component {
   state = { hasGAuth: false, hasAuthy: false };
@@ -68,7 +69,7 @@ class MultiFactorAuthentication extends Component {
     } = this.props;
     const { viewStyleContainer, textStyle } = styles;
     return (
-      <View>
+      <Screen>
         <Text
           style={[
             textStyle,
@@ -95,30 +96,40 @@ class MultiFactorAuthentication extends Component {
           onFulfill={code => verifyMFA(code)}
         />
         {type === 'token' ? (
-          <View style={{ padding: 16 }}>
-            <Button
-              label="OPEN GOOGLE AUTHENTICATOR"
-              textColor={colors.secondaryContrast}
-              backgroundColor={colors.secondary}
-              reference={input => {
-                this.login = input;
-              }}
-              onPress={() => this._openAuthenticator('GAuth')}
-              // animation="fadeInUpBig"
-            />
-            <Button
-              label="OPEN AUTHY"
-              textColor={colors.secondaryContrast}
-              backgroundColor={colors.secondary}
-              reference={input => {
-                this.login = input;
-              }}
-              onPress={() => this._openAuthenticator('Authy')}
-              // animation="fadeInUpBig"
-            />
+          <View
+            style={{
+              padding: 8,
+              flex: 1,
+              flexDirection: 'column',
+              justifyContent: 'flex-start',
+            }}>
+            <View>
+              <Button
+                label="OPEN GOOGLE AUTHENTICATOR"
+                textColor={colors.secondaryContrast}
+                backgroundColor={colors.secondary}
+                reference={input => {
+                  this.login = input;
+                }}
+                onPress={() => this._openAuthenticator('GAuth')}
+                // animation="fadeInUpBig"
+              />
+            </View>
+            {/* <View>
+              <Button
+                label="OPEN AUTHY"
+                textColor={colors.secondaryContrast}
+                backgroundColor={colors.secondary}
+                reference={input => {
+                  this.login = input;
+                }}
+                onPress={() => this._openAuthenticator('Authy')}
+                // animation="fadeInUpBig"
+              />
+            </View> */}
           </View>
         ) : (
-          <View style={{ padding: 16 }}>
+          <View style={{ padding: 8 }}>
             <Button
               label="Resend SMS"
               textColor={colors.secondaryContrast}
@@ -132,7 +143,7 @@ class MultiFactorAuthentication extends Component {
             />
           </View>
         )}
-      </View>
+      </Screen>
     );
   }
 }
@@ -169,6 +180,7 @@ const styles = {
     justifyContent: 'center',
     textAlign: 'center',
     padding: 16,
+    paddingVertical: 24,
     fontSize: 18,
     color: 'black',
   },

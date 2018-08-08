@@ -39,7 +39,7 @@
   "pin": {
     "appLoad": true,
     "security": false,
-    "send": true,
+    "send": false,
     "withdraw": true,
     "updateDetails": false
   },

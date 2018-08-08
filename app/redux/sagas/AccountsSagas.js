@@ -69,7 +69,7 @@ function* fetchAccounts() {
 
     yield put({
       type: FETCH_ACCOUNTS_ASYNC.success,
-      payload: { wallets, activeWalletIndex, showAccountLabel },
+      payload: { wallets, activeWalletIndex: 0, showAccountLabel },
     });
   } catch (error) {
     console.log('accountsFetch', error);
@@ -100,7 +100,10 @@ function* setActiveCurrency(action) {
     ]);
   } catch (error) {
     console.log(error);
-    yield put({ type: SET_ACTIVE_CURRENCY_ASYNC.error, error });
+    yield put({
+      type: SET_ACTIVE_CURRENCY_ASYNC.error,
+      payload: error.message,
+    });
   }
 }
 

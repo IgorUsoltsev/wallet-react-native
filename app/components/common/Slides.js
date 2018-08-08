@@ -36,7 +36,7 @@ class Slides extends Component {
             style={[imageStylePhoto, { width, height }]}
             source={
               slide.image === 'pxpay'
-                ? require('./../../../assets/icons/pxpay1.png')
+                ? require('./../../../assets/icons/pxpay.png')
                 : require('./../../../assets/icons/card1_transparent.png')
             }
           />

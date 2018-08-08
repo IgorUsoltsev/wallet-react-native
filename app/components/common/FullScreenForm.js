@@ -95,7 +95,7 @@ const FullScreenForm = props => {
                   <Text
                     style={[
                       textStyleAction,
-                      { color: colors[color + 'Contrast'] },
+                      { color: colors[color + 'Contrast'], textAlign: 'right' },
                     ]}>
                     {textFooterRight}
                   </Text>
@@ -132,7 +132,7 @@ const styles = {
     justifyContent: 'space-between',
     flexDirection: 'row',
     height: 64,
-    padding: 8,
+    // padding: 8,
     paddingBottom: 16,
     zIndex: 0,
     // backgroundColor: 'white',

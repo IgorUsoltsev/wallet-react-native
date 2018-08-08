@@ -97,6 +97,7 @@ const styles = {
   textStyleLink: {
     color: Colors.primaryContrast,
     fontSize: 12,
+    paddingTop: 2,
     // flex: 1,
     marginRight: 8,
   },

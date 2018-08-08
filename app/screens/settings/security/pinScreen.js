@@ -132,18 +132,22 @@ class PinScreen extends Component {
   }
 
   activateFingerprint = async () => {
-    if (Platform.OS !== 'ios') {
+    if (Platform.OS === 'android') {
       this.setState({
         modalVisible: true,
         modalType: 'setFingerprint',
       });
     }
-    if (await Expo.Fingerprint.authenticateAsync()) {
+    let result = await Expo.Fingerprint.authenticateAsync('Biometric scan');
+
+    if (result.success) {
       this.props.activateFingerprint();
       this.setState({
         modalVisible: true,
         modalType: 'confirmFingerprint',
       });
+    } else {
+      this.props.pinFail('Unable to authenticate with biometrics');
     }
   };
 
