@@ -69,22 +69,20 @@ class HomeScreen extends Component {
         />
         {/* currency={item} accountLabel={account.name} /> */}
         {/* {this.renderAccounts()} */}
-        <Swiper renderPagination={renderPagination} loop={false}>
-          <View style={{ flex: 1 }}>
-            <HomeCards navigation={this.props.navigation} />
-            {/*<TransactionList*/}
-              {/*// updateBalance={this.getBalanceInfo}*/}
-              {/*// fetchAccounts={fetchAccounts}*/}
-              {/*currencyCode={*/}
-                {/*wallets && wallets.length*/}
-                  {/*? wallets[activeWalletIndex].currency.currency.code*/}
-                  {/*: ''*/}
-              {/*}*/}
-              {/*// showDialog={this.showDialog}*/}
-              {/*// logout={this.logout}*/}
-            {/*/>*/}
-          </View>
-        </Swiper>
+        <HomeCards navigation={this.props.navigation} />
+        {/*<Swiper renderPagination={renderPagination} loop={false} style={{backgroundColor: 'red'}}>*/}
+          {/*<TransactionList*/}
+          {/*// updateBalance={this.getBalanceInfo}*/}
+          {/*// fetchAccounts={fetchAccounts}*/}
+          {/*currencyCode={*/}
+          {/*wallets && wallets.length*/}
+          {/*? wallets[activeWalletIndex].currency.currency.code*/}
+          {/*: ''*/}
+          {/*}*/}
+          {/*// showDialog={this.showDialog}*/}
+          {/*// logout={this.logout}*/}
+          {/*/>*/}
+        {/*</Swiper>*/}
         {/* <TransactionPopUp
           popupDialog={popupDialog => {
             this.popupDialog = popupDialog;

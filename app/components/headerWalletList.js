@@ -150,6 +150,7 @@ class HeaderWalletList extends Component {
 const styles = {
   viewStyleContainer: {
     flex: 1,
+    flexGrow: 1,
     flexDirection: 'column',
     // elevation: 4,
     // shadowColor: '#000',
